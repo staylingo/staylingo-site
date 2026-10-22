@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050b18;--bg2:#081426;--panel:rgba(255,255,255,.04);--line:rgba(255,255,255,.12);--ink:#eef2f8;--muted:#a8b6c9;--amber:#f5a623;--amber2:#ffb733;--cyan:#38e1ff}
+:root{--bg:#050b18;--bg2:#081426;--panel:rgba(255,255,255,.04);--line:rgba(255,255,255,.12);--ink:#eef2f8;--muted:#a8b6c9;--amber:#f5a623;--cyan:#38e1ff;--red:#ff7a7a}
 *{box-sizing:border-box}body{margin:0;font-family:"Public Sans",system-ui,sans-serif;color:var(--ink);background:radial-gradient(1000px 550px at 85% -10%,rgba(56,225,255,.13),transparent 60%),radial-gradient(800px 500px at -10% 15%,rgba(245,166,35,.11),transparent 55%),linear-gradient(180deg,var(--bg),var(--bg2));line-height:1.6;min-height:100vh}
 h1{font-family:"Bricolage Grotesque",sans-serif;line-height:1.08;margin:0}p{margin:0}a{color:inherit;text-decoration:none}
 .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
@@ -23,6 +23,7 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rg
 .links{display:flex;gap:22px;margin-left:auto;font-size:14.5px;font-weight:600;color:var(--muted)}.links a:hover{color:#fff}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:12px 22px;font-weight:700;font-size:14.5px;border:1.5px solid transparent;cursor:pointer}
 .btn-amber{background:linear-gradient(135deg,var(--amber),#ff8a3d);color:#1a1200;box-shadow:0 10px 26px rgba(245,166,35,.35);width:100%;padding:14px}
+.btn-amber:disabled{opacity:.55;cursor:wait}
 .btn-ghost{background:transparent;color:#fff;border-color:var(--line)}
 .btn-sm{padding:9px 18px}
 .auth{max-width:460px;margin:56px auto 70px;background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:36px 32px;backdrop-filter:blur(10px)}
@@ -36,11 +37,15 @@ label{display:block;font-size:13.5px;font-weight:600;margin:14px 0 6px}
 input{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:#fff;font-size:15px;font-family:inherit}
 input:focus{outline:2px solid rgba(245,166,35,.55);border-color:transparent}
 .rowlink{display:flex;justify-content:flex-end;margin-top:10px;font-size:13.5px}
-.rowlink a{color:var(--amber)}
+.rowlink a{color:var(--amber);cursor:pointer}
 .note{margin-top:18px;background:rgba(56,225,255,.07);border:1px solid rgba(56,225,255,.3);border-radius:14px;padding:13px 15px;font-size:13.5px;color:var(--muted)}
 .note b{color:#fff}
 .alt{text-align:center;margin-top:20px;color:var(--muted);font-size:14.5px}
 .alt a{color:var(--amber);font-weight:700}
+.err{display:none;background:rgba(255,90,90,.1);border:1px solid rgba(255,122,122,.5);color:#ffb3b3;border-radius:14px;padding:12px 15px;font-size:14px;margin-top:16px}
+.okmsg{display:none;background:rgba(46,230,168,.1);border:1px solid rgba(46,230,168,.45);border-radius:14px;padding:12px 15px;font-size:14px;margin-top:16px}
+.hidden{display:none}
+.who{font-size:15px;margin:6px 0 14px;color:var(--muted)}.who b{color:#fff}
 @media(max-width:860px){.links{display:none}}
 </style>
 </head>
@@ -52,6 +57,7 @@ input:focus{outline:2px solid rgba(245,166,35,.55);border-color:transparent}
 </div></header>
 
 <div class="wrap"><div class="auth">
+<div id="formZone">
 <h1>Welcome back</h1>
 <p class="sub">Your guests were answered while you were away. Log in to see everything — in English.</p>
 <button class="gbtn" id="googleBtn"><svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>Continue with Google</button>
@@ -59,22 +65,83 @@ input:focus{outline:2px solid rgba(245,166,35,.55);border-color:transparent}
 <form id="liForm">
 <label for="email">Email address</label><input id="email" type="email" required placeholder="you@yourcompany.com" autocomplete="email">
 <label for="pw">Password</label><input id="pw" type="password" required placeholder="••••••••" autocomplete="current-password">
-<div class="rowlink"><a href="mailto:hello@staylingo.work.gd?subject=Password%20reset%20—%20StayLingo">Forgot your password?</a></div>
+<div class="rowlink"><a id="forgotLink">Forgot your password?</a></div>
 <div style="height:16px"></div>
-<button class="btn btn-amber" type="submit">Log in →</button>
+<button class="btn btn-amber" type="submit" id="liBtn">Log in →</button>
 </form>
-<div class="note">🌙 <b>Founding phase:</b> accounts are being activated in waves. If your login isn't live yet, your founding host dashboard link is in the activation email from <b>hello@staylingo.work.gd</b> — or message us there and we'll bring you straight in.</div>
+<div class="or">OR WITH YOUR PHONE</div>
+<form id="phForm">
+<label for="ph">Phone number (with country code)</label><input id="ph" type="tel" placeholder="+39 …" autocomplete="tel">
+<div style="height:12px"></div>
+<button class="btn btn-ghost" type="button" id="sendCodeBtn" style="width:100%">Text me a login code</button>
+<div id="codeZone" class="hidden">
+<label for="smscode">Enter the 6-digit code</label><input id="smscode" inputmode="numeric" placeholder="••••••">
+<div style="height:12px"></div>
+<button class="btn btn-amber" type="button" id="verifyCodeBtn">Verify &amp; log in →</button>
+</div>
+</form>
+<div class="err" id="errBox"></div>
+<div class="okmsg" id="okBox"></div>
+<div class="note">🌙 <b>Founding phase:</b> your account is real and live. Your host inbox opens with your founding activation — if anything looks off, email <b>hello@staylingo.work.gd</b> and we'll bring you straight in.</div>
 <p class="alt">New to StayLingo? <a href="signup.html">Create your account</a></p>
+</div>
+
+<div id="signedZone" class="hidden">
+<h1>👋 Welcome back</h1>
+<p class="who">Signed in as <b id="whoEmail"></b></p>
+<div class="okmsg" style="display:block">✅ <b>You're logged in.</b> Your founding host inbox is being connected — your listings, translated guest conversations and upsells will appear here as your activation completes. Questions? <b>hello@staylingo.work.gd</b> or DM “STAY” to <b>@staylingo.ai</b>.</div>
+<div style="height:14px"></div>
+<button class="btn btn-ghost" id="signOutBtn" style="width:100%">Sign out</button>
+</div>
 </div></div>
 
-<script>
-function foundingNote(){
-  const box=document.querySelector('.note');
-  box.innerHTML='✉️ <b>One moment — founding phase.</b> Logins are activating in waves right now. If yours is not live yet, email <b>hello@staylingo.work.gd</b> from your account email and we will bring you straight in.';
-  box.scrollIntoView({behavior:'smooth',block:'center'});
-}
-document.getElementById('liForm').addEventListener('submit',ev=>{ev.preventDefault();foundingNote();});
-document.getElementById('googleBtn').addEventListener('click',foundingNote);
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = { apiKey: "AIzaSyDbop69CYu20MpSgTnw8-pWXh9T4TSZgm8", authDomain: "staylingo-79c46.firebaseapp.com", projectId: "staylingo-79c46", storageBucket: "staylingo-79c46.firebasestorage.app", messagingSenderId: "322556880973", appId: "1:322556880973:web:cf28e535056575a7d59404" };
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const $ = id => document.getElementById(id);
+const errBox = $('errBox'), okBox = $('okBox');
+function showErr(e){ okBox.style.display='none'; errBox.textContent = "⚠️ " + friendly(e); errBox.style.display='block'; }
+function showOk(t){ errBox.style.display='none'; okBox.textContent = t; okBox.style.display='block'; }
+function friendly(e){ const m = (e && e.message) || String(e);
+  if(m.includes('invalid-credential')||m.includes('wrong-password')||m.includes('user-not-found')) return 'Email or password not recognised — check them and try again, or use “Forgot your password?”.';
+  if(m.includes('invalid-email')) return 'That email address does not look right.';
+  if(m.includes('popup-closed')) return 'The Google window was closed — please try again.';
+  if(m.includes('too-many-requests')) return 'Too many attempts — please wait a few minutes and try again.';
+  if(m.includes('invalid-phone')) return 'That phone number does not look right — include the country code.';
+  if(m.includes('invalid-verification-code')) return 'That code is not correct — check the SMS and try again.';
+  return m; }
+
+onAuthStateChanged(auth, user => {
+  if(user){ $('formZone').classList.add('hidden'); $('signedZone').classList.remove('hidden'); $('whoEmail').textContent = user.email || user.phoneNumber || 'your account'; }
+  else { $('formZone').classList.remove('hidden'); $('signedZone').classList.add('hidden'); }
+});
+
+$('liForm').addEventListener('submit', async ev => {
+  ev.preventDefault(); const b=$('liBtn'); b.disabled=true; b.textContent='Logging in…';
+  try{ await signInWithEmailAndPassword(auth, $('email').value.trim(), $('pw').value); }
+  catch(e){ showErr(e); b.disabled=false; b.textContent='Log in →'; }
+});
+$('googleBtn').addEventListener('click', async () => { try{ await signInWithPopup(auth, new GoogleAuthProvider()); }catch(e){ showErr(e); } });
+$('forgotLink').addEventListener('click', async () => {
+  const em = $('email').value.trim();
+  if(!em){ showErr(new Error('Enter your email above first, then tap “Forgot your password?” again.')); return; }
+  try{ await sendPasswordResetEmail(auth, em); showOk('✅ Password reset email sent to ' + em + ' — check your inbox.'); }
+  catch(e){ showErr(e); }
+});
+let confirmation = null;
+$('sendCodeBtn').addEventListener('click', async () => {
+  try{
+    if(!window._rcv) window._rcv = new RecaptchaVerifier(auth, 'sendCodeBtn', { size: 'invisible' });
+    confirmation = await signInWithPhoneNumber(auth, $('ph').value.trim(), window._rcv);
+    $('codeZone').classList.remove('hidden'); $('sendCodeBtn').textContent='Code sent — tap to resend';
+  }catch(e){ showErr(e); }
+});
+$('verifyCodeBtn').addEventListener('click', async () => { try{ await confirmation.confirm($('smscode').value.trim()); }catch(e){ showErr(e); } });
+$('signOutBtn').addEventListener('click', () => signOut(auth));
 </script>
 </body>
 </html>
