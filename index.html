@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="color-scheme" content="light dark" />
 <meta name="description" content="StayLingo — AI guest messaging for European Airbnb hosts on Beds24 and Smoobu. Answers guests in their language in under a minute, 24/7." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://staylingo.work.gd/" />
@@ -26,655 +25,140 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --navy:#0a1e3c;
-    --navy-2:#10294f;
-    --navy-3:#16325e;
-    --ink:#13233d;
-    --muted:#5a6b84;
-    --bg:#fbfaf7;
-    --surface:#ffffff;
-    --surface-2:#f2efe8;
-    --line:#e3ddd0;
-    --amber:#f5a623;
-    --amber-2:#ffb733;
-    --amber-soft:#fff3d6;
-    --green:#1a9e6b;
-    --green-soft:#e2f5ec;
-    --radius:18px;
-    --shadow:0 18px 40px rgba(10,30,60,.14);
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --ink:#eef2f8;
-      --muted:#a8b6c9;
-      --bg:#081426;
-      --surface:#0e2242;
-      --surface-2:#12294e;
-      --line:#23406e;
-      --amber-soft:#3a2c08;
-      --green-soft:#0d3325;
-      --shadow:0 18px 40px rgba(0,0,0,.45);
-    }
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:"Public Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
-  h1,h2,h3{font-family:"Bricolage Grotesque","Public Sans",sans-serif;line-height:1.05;letter-spacing:-.02em;margin:0}
-  p{margin:0}
-  a{color:inherit}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:14px 24px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease}
-  .btn:active{transform:scale(.98)}
-  .btn-amber{background:var(--amber);color:#1a1200;box-shadow:0 8px 20px rgba(245,166,35,.35)}
-  .btn-amber:hover{background:var(--amber-2)}
-  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
-  .btn-ghost:hover{border-color:#fff}
-  .btn-navy{background:var(--navy);color:#fff}
-  .btn-outline{background:transparent;color:var(--ink);border-color:var(--line)}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);flex:none}
-
-  /* ---------- HERO ---------- */
-  .hero{background:radial-gradient(900px 480px at 85% -10%, #1d4479 0%, transparent 60%), linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 55%, #0d2c55 100%);color:#fff;padding:56px 0 72px;overflow:hidden}
-  .hero .eyebrow{color:var(--amber-2)}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;margin-top:18px}
-  .hero h1{font-size:clamp(38px,6vw,62px);font-weight:800}
-  .hero h1 .hl{color:var(--amber-2)}
-  .hero .lede{margin-top:20px;font-size:clamp(16.5px,2.2vw,19px);color:#d7e2f2;max-width:34em}
-  .hero .lede strong{color:#fff}
-  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-  .hero-note{margin-top:16px;font-size:13.5px;color:#9db2cf}
-  .hero-note b{color:#fff}
-  .hero-stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
-  .stat{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);border-radius:14px;padding:12px 16px;min-width:118px}
-  .stat b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:22px;line-height:1.1}
-  .stat span{font-size:12.5px;color:#aebfd9}
-
-  /* mini language chips visual */
-  .lang-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:20px;backdrop-filter:blur(4px)}
-  .lang-card h3{font-size:15px;color:#fff;margin-bottom:14px;font-family:"Public Sans",sans-serif;letter-spacing:.02em}
-  .bubble-row{display:flex;flex-direction:column;gap:10px}
-  .mini-bubble{border-radius:14px;padding:10px 14px;font-size:14px;max-width:92%}
-  .mini-bubble.guest{background:#fff;color:#13233d;border-bottom-left-radius:4px;align-self:flex-start}
-  .mini-bubble.ai{background:var(--amber);color:#1c1400;border-bottom-right-radius:4px;align-self:flex-end}
-  .mini-bubble small{display:block;font-size:11px;opacity:.65;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
-  .lang-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-  .lang-pills span{font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 10px;color:#dbe6f5}
-
-  /* ---------- SECTIONS ---------- */
-  section{padding:72px 0}
-  .section-head{max-width:680px}
-  .section-head .eyebrow{color:#b97d0a}
-  @media (prefers-color-scheme: dark){.section-head .eyebrow{color:var(--amber-2)}}
-  .section-head h2{font-size:clamp(28px,4vw,40px);font-weight:800;margin-top:12px}
-  .section-head p{margin-top:14px;color:var(--muted);font-size:16.5px}
-
-  /* ---------- DEMO ---------- */
-  .demo-section{background:var(--surface-2)}
-  .demo-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start;margin-top:36px}
-  .demo-copy h3{font-size:22px;margin-bottom:10px}
-  .demo-copy p{color:var(--muted);margin-bottom:14px}
-  .demo-steps{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
-  .demo-steps li{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:14.5px}
-  .demo-steps .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
-  @media (prefers-color-scheme: dark){.demo-steps .n{background:var(--amber);color:#1a1200}}
-  .demo-steps b{color:var(--ink)}
-
-  /* phone */
-  .phone-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
-  .phone{width:min(360px,100%);background:#0b1526;border-radius:38px;padding:12px;box-shadow:var(--shadow)}
-  .phone-screen{background:#f4f1ea;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;height:600px}
-  @media (prefers-color-scheme: dark){.phone-screen{background:#0a1a33}}
-  .phone-status{display:flex;justify-content:space-between;align-items:center;padding:12px 18px 6px;font-size:12px;font-weight:700;color:var(--ink)}
-  .phone-head{padding:8px 18px 12px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center}
-  .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--navy-3),var(--navy));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:none;font-family:"Bricolage Grotesque",sans-serif}
-  .phone-head b{display:block;font-size:14.5px;line-height:1.25}
-  .phone-head span{font-size:12px;color:var(--muted)}
-  .view-toggle{display:flex;gap:6px;padding:10px 14px 0}
-  .view-toggle button{flex:1;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:8px 6px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
-  .view-toggle button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-  @media (prefers-color-scheme: dark){.view-toggle button.active{background:var(--amber);color:#1a1200;border-color:var(--amber)}}
-  .chat{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:10px}
-  .chat[hidden]{display:none}
-  .scene-tag{align-self:center;background:var(--navy);color:#fff;font-size:12px;font-weight:600;border-radius:999px;padding:5px 13px;text-align:center}
-  .scene-tag.amber{background:var(--amber-soft);color:#7a5200;border:1px solid #ecd28a}
-  @media (prefers-color-scheme: dark){.scene-tag.amber{color:var(--amber-2)}}
-  .msg{max-width:86%;border-radius:16px;padding:10px 13px;font-size:14px;line-height:1.45;opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
-  .msg.show{opacity:1;transform:none}
-  .msg .who{display:block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;opacity:.6;margin-bottom:3px}
-  .msg .time{display:block;font-size:11px;opacity:.55;margin-top:4px;text-align:right}
-  .msg.guest{background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start;color:var(--ink)}
-  .msg.ai{background:var(--navy);color:#eaf1fb;border-bottom-right-radius:5px;align-self:flex-end}
-  @media (prefers-color-scheme: dark){.msg.ai{background:#1b3a68}}
-  .typing{align-self:flex-end;background:var(--navy);border-radius:16px;border-bottom-right-radius:5px;padding:12px 16px;display:none;gap:5px}
-  .typing.on{display:flex}
-  .typing i{width:7px;height:7px;border-radius:50%;background:#cfe0f5;animation:blink 1s infinite}
-  .typing i:nth-child(2){animation-delay:.18s}.typing i:nth-child(3){animation-delay:.36s}
-  @keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
-  .reply-speed{align-self:flex-end;font-size:12px;font-weight:700;color:var(--green);opacity:0;transition:opacity .3s}
-  .reply-speed.show{opacity:1}
-  .upsell-card{align-self:flex-end;width:86%;background:var(--amber-soft);border:1.5px solid var(--amber);border-radius:16px;padding:13px 14px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s;color:#4a3400}
-  @media (prefers-color-scheme: dark){.upsell-card{color:#ffe1a1}}
-  .upsell-card.show{opacity:1;transform:none}
-  .upsell-card b{display:block;font-size:14px;margin-bottom:3px}
-  .upsell-card p{font-size:13px;margin-bottom:10px}
-  .upsell-btn{width:100%;border:0;border-radius:10px;background:var(--amber);color:#1c1400;font:inherit;font-weight:700;font-size:14px;padding:11px;cursor:default}
-  .upsell-btn.done{background:var(--green);color:#fff}
-  .paid-banner{margin:0 14px 14px;background:var(--green-soft);border:1.5px solid var(--green);color:#0c5c3a;border-radius:14px;padding:12px 14px;font-size:14px;font-weight:600;display:none}
-  @media (prefers-color-scheme: dark){.paid-banner{color:#7fe3b8}}
-  .paid-banner.show{display:block}
-  .paid-banner b{display:block;font-size:15px}
-  .replay-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
-  .demo-status{font-size:13.5px;color:var(--muted);min-height:1.4em;text-align:center}
-
-  /* ---------- GAP ---------- */
-  .gap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
-  .gap-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
-  .gap-card .tag{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;border-radius:999px;padding:4px 11px;display:inline-block;margin-bottom:14px}
-  .tag-no{background:#fdeaea;color:#a02c2c}
-  .tag-mid{background:#fdf0d5;color:#8a5d00}
-  .tag-yes{background:var(--green-soft);color:#0c5c3a}
-  @media (prefers-color-scheme: dark){.tag-no{background:#3d1414;color:#ff9d9d}.tag-mid{background:#3a2c08;color:#ffcf6b}.tag-yes{color:#7fe3b8}}
-  .gap-card h3{font-size:19px;margin-bottom:8px}
-  .gap-card p{color:var(--muted);font-size:14.5px}
-  .gap-card ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:14px}
-  .gap-card li{position:relative;padding-left:22px}
-  .gap-card li::before{content:"—";color:var(--amber);font-weight:800;position:absolute;left:0;top:0}
-  .safety-strip{margin-top:22px;background:var(--navy);color:#dbe6f5;border-radius:var(--radius);padding:22px 26px;display:flex;gap:16px;align-items:flex-start}
-  .safety-strip .shield{font-size:24px;line-height:1;flex:none}
-  .safety-strip b{color:#fff}
-  .safety-strip p{font-size:15px}
-
-  /* ---------- HOW ---------- */
-  .how-section{background:var(--surface-2)}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
-  .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-  .step .num{font-family:"Bricolage Grotesque",sans-serif;font-size:40px;font-weight:800;color:var(--amber);line-height:1}
-  .step h3{font-size:19px;margin:12px 0 8px}
-  .step p{color:var(--muted);font-size:14.5px}
-  .mode-bar{margin-top:22px;display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch}
-  .mode{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
-  .mode b{display:block;font-size:16px;margin-bottom:5px}
-  .mode p{color:var(--muted);font-size:14px}
-  .mode-arrow{display:flex;align-items:center;font-size:24px;color:var(--amber);font-weight:800}
-
-  /* ---------- PRICING ---------- */
-  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:38px;max-width:820px}
-  .price-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:30px;position:relative}
-  .price-card.pro{border:2px solid var(--amber);box-shadow:var(--shadow)}
-  .price-card .plan{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .price-card .amount{font-family:"Bricolage Grotesque",sans-serif;font-size:46px;font-weight:800;margin-top:8px;line-height:1}
-  .price-card .amount span{font-size:15px;font-weight:600;color:var(--muted);font-family:"Public Sans",sans-serif}
-  .price-card ul{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14.5px}
-  .price-card li{display:flex;gap:9px}
-  .price-card li::before{content:"✓";color:var(--green);font-weight:800;flex:none}
-  .pop{position:absolute;top:-13px;right:22px;background:var(--amber);color:#1c1400;font-size:12px;font-weight:800;letter-spacing:.05em;border-radius:999px;padding:5px 13px;text-transform:uppercase}
-  .founding{margin-top:22px;max-width:820px;background:linear-gradient(140deg,var(--navy),var(--navy-3));color:#fff;border-radius:22px;padding:30px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
-  .founding h3{font-size:24px;margin-bottom:8px}
-  .founding p{color:#c9d8ee;font-size:15px}
-  .founding p b{color:#fff}
-  .founding .deal{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:18px 20px;text-align:center}
-  .founding .deal .old{font-size:14px;color:#9db2cf;text-decoration:line-through}
-  .founding .deal .new{font-family:"Bricolage Grotesque",sans-serif;font-size:38px;font-weight:800;color:var(--amber-2);line-height:1.1}
-  .founding .deal span{font-size:13px;color:#c9d8ee}
-
-  /* ---------- CTA ---------- */
-  .cta-section{padding-top:24px}
-  .cta-card{background:var(--navy);border-radius:26px;padding:clamp(30px,5vw,54px);color:#fff;text-align:center;position:relative;overflow:hidden}
-  .cta-card::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% -20%,rgba(245,166,35,.28),transparent 65%);pointer-events:none}
-  .cta-card h2{font-size:clamp(28px,4.5vw,42px);font-weight:800;position:relative}
-  .cta-card h2 .hl{color:var(--amber-2)}
-  .cta-card p{position:relative;margin:16px auto 0;max-width:36em;color:#c9d8ee;font-size:16.5px}
-  .spots{position:relative;display:inline-flex;gap:8px;align-items:center;margin-top:22px;background:rgba(245,166,35,.15);border:1px solid var(--amber);color:var(--amber-2);border-radius:999px;padding:8px 18px;font-weight:700;font-size:14.5px}
-  .stay-box{position:relative;margin:28px auto 0;max-width:480px;background:#fff;border-radius:18px;padding:22px;color:#13233d;text-align:left}
-  .stay-box label{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#7a879c;display:block;margin-bottom:8px}
-  .stay-row{display:flex;gap:10px;align-items:stretch}
-  .stay-word{flex:1;background:#f2efe8;border:1.5px dashed #c9b98a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:"Bricolage Grotesque",sans-serif;font-size:30px;font-weight:800;letter-spacing:.28em;padding:10px 0 10px .28em;color:#0a1e3c}
-  .copy-btn{border:0;border-radius:12px;background:var(--navy);color:#fff;font:inherit;font-weight:700;font-size:14px;padding:0 20px;cursor:pointer}
-  .copy-btn:active{transform:scale(.97)}
-  .stay-box p{margin:12px 0 0;color:#5a6b84;font-size:13.5px;text-align:left;max-width:none}
-  .copy-msg{font-size:13px;color:var(--green);font-weight:700;min-height:1.3em;margin-top:8px;text-align:left}
-
-  /* ---------- FAQ ---------- */
-  .faq-list{max-width:760px;margin-top:34px;display:flex;flex-direction:column;gap:12px}
-  details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 20px}
-  summary{cursor:pointer;font-weight:700;font-size:16px;padding:17px 0;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";font-size:22px;color:var(--amber);font-weight:800;flex:none}
-  details[open ] summary::after{content:"–"}
-  details p{color:var(--muted);font-size:15px;padding:0 0 18px}
-
-  footer{padding:34px 0 44px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
-  footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
-
-  @media (max-width:860px){
-    .hero-grid,.demo-grid,.founding{grid-template-columns:1fr}
-    .gap-grid,.steps,.price-grid{grid-template-columns:1fr}
-    .mode-bar{grid-template-columns:1fr}
-    .mode-arrow{justify-content:center;transform:rotate(90deg)}
-    section{padding:54px 0}
-    .phone-screen{height:560px}
-    .safety-strip{flex-direction:column;gap:8px}
-  }
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto}
-    .msg,.upsell-card{transition:none}
-    .typing i{animation:none;opacity:.7}
-  }
+:root{--bg:#050b18;--bg2:#081426;--panel:rgba(255,255,255,.04);--panel2:rgba(255,255,255,.07);--line:rgba(255,255,255,.12);--ink:#eef2f8;--muted:#a8b6c9;--amber:#f5a623;--amber2:#ffb733;--cyan:#38e1ff;--green:#2ee6a8;--radius:20px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Public Sans",system-ui,sans-serif;color:var(--ink);background:radial-gradient(1100px 600px at 85% -10%,rgba(56,225,255,.14),transparent 60%),radial-gradient(900px 550px at -10% 20%,rgba(245,166,35,.12),transparent 55%),linear-gradient(180deg,var(--bg),var(--bg2));line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Bricolage Grotesque","Public Sans",sans-serif;line-height:1.05;letter-spacing:-.02em;margin:0}
+p{margin:0}a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(5,11,24,.72);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:26px;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:21px}
+.logo .dot{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--amber),#ff7847);display:grid;place-items:center;font-size:18px;box-shadow:0 6px 18px rgba(245,166,35,.45)}
+.logo em{font-style:normal;color:var(--amber)}
+.links{display:flex;gap:22px;margin-left:auto;font-size:14.5px;font-weight:600;color:var(--muted)}
+.links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:12px 22px;font-weight:700;font-size:14.5px;border:1.5px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:active{transform:scale(.98)}
+.btn-amber{background:linear-gradient(135deg,var(--amber),#ff8a3d);color:#1a1200;box-shadow:0 10px 26px rgba(245,166,35,.35)}
+.btn-amber:hover{box-shadow:0 14px 32px rgba(245,166,35,.5)}
+.btn-ghost{background:transparent;color:#fff;border-color:var(--line)}
+.btn-ghost:hover{border-color:#fff}
+.btn-sm{padding:9px 18px}
+.hero{padding:84px 0 30px;text-align:center}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(56,225,255,.35);padding:7px 14px;border-radius:999px;background:rgba(56,225,255,.06)}
+.hero h1{font-size:clamp(40px,6.4vw,72px);font-weight:800;margin:26px auto 18px;max-width:900px}
+.grad{background:linear-gradient(92deg,#fff 20%,var(--amber2) 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{color:var(--muted);font-size:clamp(16px,2vw,19px);max-width:680px;margin:0 auto 30px}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.trust{margin-top:22px;color:var(--muted);font-size:13.5px}
+section{padding:64px 0}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);text-align:center}
+h2.title{font-size:clamp(30px,4.4vw,46px);font-weight:800;text-align:center;margin:12px auto 14px;max-width:760px}
+.lede{color:var(--muted);text-align:center;max-width:640px;margin:0 auto 40px}
+.grid{display:grid;gap:18px}
+.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px;backdrop-filter:blur(8px)}
+.card:hover{background:var(--panel2);border-color:rgba(255,255,255,.22)}
+.card .ic{font-size:26px;margin-bottom:12px}
+.card h3{font-size:19px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15px}
+.demo-shell{max-width:520px;margin:0 auto;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.phone{background:#0a1626;border-radius:20px;padding:18px;min-height:430px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:82%;padding:11px 14px;border-radius:16px;font-size:14.5px;line-height:1.45;opacity:0;transform:translateY(8px);transition:all .45s ease}
+.msg.show{opacity:1;transform:none}
+.msg.guest{align-self:flex-start;background:#16283f;border:1px solid var(--line);border-bottom-left-radius:6px}
+.msg.ai{align-self:flex-end;background:linear-gradient(135deg,rgba(245,166,35,.22),rgba(255,138,61,.16));border:1px solid rgba(245,166,35,.4);border-bottom-right-radius:6px}
+.msg.sys{align-self:center;background:transparent;border:1px dashed rgba(56,225,255,.4);color:var(--cyan);font-size:12.5px;text-align:center}
+.msg .t{display:block;margin-top:6px;font-size:11px;color:var(--muted)}
+.demo-bar{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.demo-bar .lbl{font-size:13px;color:var(--muted)}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(46,230,168,.14);color:var(--green);font-size:12px;font-weight:700}
+.langs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.lang{padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:14px;font-weight:600}
+.offer{background:linear-gradient(135deg,rgba(245,166,35,.16),rgba(56,225,255,.08));border:1px solid rgba(245,166,35,.4);border-radius:28px;padding:44px 30px;text-align:center}
+.offer h2{font-size:clamp(28px,4vw,42px);margin-bottom:12px}
+.offer p{color:var(--muted);max-width:560px;margin:0 auto 24px}
+.price-big{font-family:"Bricolage Grotesque",sans-serif;font-size:56px;font-weight:800;color:var(--amber2)}
+footer{border-top:1px solid var(--line);padding:44px 0 34px;color:var(--muted);font-size:14px}
+.foot{display:flex;gap:28px;flex-wrap:wrap;justify-content:space-between}
+.foot a:hover{color:#fff}
+.small{font-size:12.5px;color:#7286a0;margin-top:22px}
+@media(max-width:860px){.g3,.g2{grid-template-columns:1fr}.links{display:none}.hero{padding:56px 0 20px}}
 </style>
 </head>
 <body>
+<header><div class="wrap nav">
+<a class="logo" href="index.html"><span class="dot">💬</span>Stay<em>Lingo</em></a>
+<nav class="links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="languages.html">Languages</a><a href="how-it-works.html">How it works</a></nav>
+<a class="btn btn-ghost btn-sm" href="login.html">Log in</a>
+<a class="btn btn-amber btn-sm" href="signup.html">Get started</a>
+</div></header>
 
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <div class="wrap">
-    <span class="eyebrow"><span class="dot"></span> StayLingo · For European hosts · Beds24 live, Smoobu next</span>
-    <div class="hero-grid">
-      <div>
-        <h1>Your guests write in German, French, Dutch, Italian. <span class="hl">StayLingo answers them — perfectly.</span></h1>
-        <p class="lede">StayLingo replies to every guest <strong>in their own language, in under a minute, 24/7</strong> — and shows you the whole conversation in English. No more 11 PM messages. No more Google Translate.</p>
-        <div class="cta-row">
-          <a class="btn btn-amber" href="#founding">Join the founding hosts</a>
-          <a class="btn btn-ghost" href="#demo">▶ Watch the demo</a>
-        </div>
-        <p class="hero-note">Founding offer: <b>first 20 hosts — first month free</b>, then €9/listing locked for life.</p>
-        <div class="hero-stats">
-          <div class="stat"><b>&lt; 60 sec</b><span>reply time, day or night</span></div>
-          <div class="stat"><b>30+</b><span>guest languages</span></div>
-          <div class="stat"><b>24/7</b><span>even while you sleep</span></div>
-        </div>
-      </div>
-      <div class="lang-card" aria-hidden="true">
-        <h3>ONE INBOX. EVERY LANGUAGE. YOU READ ENGLISH.</h3>
-        <div class="bubble-row">
-          <div class="mini-bubble guest"><small>Guest · German</small>„Können wir früher einchecken?“</div>
-          <div class="mini-bubble ai"><small>StayLingo · German</small>„Ja! Ab 13:00 Uhr ist das Apartment bereit.“</div>
-          <div class="mini-bubble guest"><small>Guest · French</small>„Où puis-je me garer ?“</div>
-          <div class="mini-bubble ai"><small>StayLingo · French</small>„Le parking gratuit est juste devant la maison.“</div>
-        </div>
-        <div class="lang-pills">
-          <span>Deutsch</span><span>Français</span><span>Nederlands</span><span>Italiano</span><span>Español</span><span>Português</span><span>+ 25 more</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+<div class="wrap hero">
+<span class="eyebrow">✦ AI guest messaging · Beds24 &amp; Smoobu</span>
+<h1>Your guests write at midnight. <span class="grad">StayLingo answers in seconds.</span></h1>
+<p class="sub">The AI front desk for European Airbnb hosts and property managers. It replies to every guest in their own language — in under a minute, 24/7 — checks your real calendar, and sells late checkout while you sleep.</p>
+<div class="cta-row"><a class="btn btn-amber" href="signup.html">Claim a founding spot →</a><a class="btn btn-ghost" href="#demo">▶ Watch the 40-second demo</a></div>
+<p class="trust">First month free · €9/listing locked for life for the first 20 hosts · No card needed</p>
+</div>
 
-<!-- ============ DEMO ============ -->
-<section class="demo-section" id="demo">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow"><span class="dot"></span> Live demo</span>
-      <h2>11:42 PM. You're asleep. Your guest isn't.</h2>
-      <p>Watch exactly what happens when a delayed flight turns into a 1 AM check-in — handled start to finish, in German, while the host sleeps.</p>
-    </div>
-    <div class="demo-grid">
-      <div class="demo-copy">
-        <h3>What you're watching</h3>
-        <p>A real scenario from a holiday apartment on the Amalfi Coast, Italy. The guest writes in German at 11:42 PM. StayLingo checks the live calendar and cleaning schedule, then answers — including the question most tools refuse to touch: a late-night check-in.</p>
-        <ul class="demo-steps">
-          <li><span class="n">1</span><span><b>Guest writes in German</b> — delayed flight, asking for a 1 AM check-in.</span></li>
-          <li><span class="n">2</span><span><b>StayLingo replies in 38 seconds</b> — in German, with self check-in, door code and parking.</span></li>
-          <li><span class="n">3</span><span><b>It offers a paid extra</b> — Sunday late checkout for €25, with a one-tap confirm button.</span></li>
-          <li><span class="n">4</span><span><b>You wake up to English</b> — the full chat translated, with €25 already collected.</span></li>
-        </ul>
-      </div>
-      <div class="phone-wrap">
-        <div class="phone" role="img" aria-label="Phone showing a simulated chat: a German guest asks for a 1 AM check-in at 11:42 PM, StayLingo replies in German in 38 seconds with door code, parking and a €25 late checkout offer, the guest confirms, and the host later sees the conversation in English with the €25 upsell collected.">
-          <div class="phone-screen">
-            <div class="phone-status"><span id="phoneClock">23:44</span><span>Amalfi Coast, IT</span><span>▂▄▆</span></div>
-            <div class="phone-head">
-              <div class="avatar">SL</div>
-              <div><b id="phoneTitle">Guest chat · Familie Weber</b><span id="phoneSub">Casa Limone · Airbnb via Beds24</span></div>
-            </div>
-            <div class="view-toggle" role="tablist" aria-label="Demo view">
-              <button id="tabGuest" class="active" type="button">Guest view · DE</button>
-              <button id="tabHost" type="button">Host view · EN</button>
-            </div>
-            <div class="chat" id="chatGuest">
-              <div class="scene-tag" data-seq="0">🌙 Tuesday · 11:42 PM · Italy</div>
-              <div class="msg guest show" data-seq="1"><span class="who">Guest · German</span>Hallo! Unser Flug hatte Verspätung. Können wir um 1 Uhr einchecken?<span class="time">23:42</span></div>
-              <div class="typing" id="typing"><i></i><i></i><i></i></div>
-              <div class="reply-speed show" id="replySpeed">⚡ StayLingo replied in 38 seconds</div>
-              <div class="msg ai show" data-seq="2"><span class="who">StayLingo · German</span>Hallo! Kein Problem — ein Check-in um 1:00 Uhr nachts ist möglich. Nutzen Sie einfach den Self-Check-in: Ihr Türcode lautet <b>4821#</b>. Parken können Sie kostenlos direkt vor dem Haus.<span class="time">23:43</span></div>
-              <div class="upsell-card show" data-seq="3">
-                <b>Am Sonntag später auschecken?</b>
-                <p>Bleiben Sie bis 13:00 Uhr statt 10:00 Uhr — für nur 25&nbsp;€, direkt hier buchbar.</p>
-                <button class="upsell-btn done" id="upsellBtn" type="button" tabindex="-1">✓ Bestätigt · 25&nbsp;€ bezahlt</button>
-              </div>
-              <div class="msg guest show" data-seq="4"><span class="who">Guest · German</span>Ja, gerne! Vielen Dank. 🙏<span class="time">23:44</span></div>
-            </div>
-            <div class="chat" id="chatHost" hidden>
-              <div class="scene-tag amber">☀️ Wednesday · 8:04 AM · What you see</div>
-              <div class="msg guest show"><span class="who">Guest · translated</span>Hi! Our flight was delayed. Can we check in at 1 AM?<span class="time">23:42</span></div>
-              <div class="msg ai show"><span class="who">StayLingo · translated</span>Hi! No problem — a 1:00 AM check-in is fine. Just use self check-in: your door code is <b>4821#</b>. You can park for free right in front of the house.<span class="time">23:43 · replied in 38 sec</span></div>
-              <div class="msg guest show"><span class="who">Guest · translated</span>Yes, please! Thank you very much. 🙏<span class="time">23:44</span></div>
-            </div>
-            <div class="paid-banner show" id="paidBanner"><b>✓ €25 upsell collected</b>Late checkout · Sunday until 1:00 PM · Paid in chat</div>
-          </div>
-        </div>
-        <div class="replay-row">
-          <button class="btn btn-navy" id="replayBtn" type="button">↻ Replay demo</button>
-        </div>
-        <p class="demo-status" id="demoStatus">That's the finished conversation — press Replay to watch it happen live, or switch to “Host view · EN” in the phone.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="demo"><div class="wrap">
+<p class="kicker">Live demo</p>
+<h2 class="title">11:42 PM. A guest lands in Italy at 1 AM.</h2>
+<p class="lede">This really happens every night. Press play and watch StayLingo handle it — in German, in 38 seconds.</p>
+<div class="demo-shell"><div class="phone" id="chat"></div>
+<div class="demo-bar"><span class="lbl">🇮🇹 Amalfi Coast · Guest: German · <span class="pill">Replied in 38s</span></span><button class="btn btn-amber btn-sm" id="replay">↻ Replay</button></div>
+</div></div></section>
 
-<!-- ============ THE GAP ============ -->
-<section id="why">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow"><span class="dot"></span> Why StayLingo</span>
-      <h2>Your channel manager has no AI. The big tools won't answer the hard questions.</h2>
-      <p>European hosts are stuck in the middle: affordable tools that do nothing smart, or expensive tools that still leave the money-making questions to you.</p>
-    </div>
-    <div class="gap-grid">
-      <div class="gap-card">
-        <span class="tag tag-no">No AI</span>
-        <h3>Beds24 &amp; Smoobu</h3>
-        <p>Great at calendars and channels — but there is no native AI answering your guests.</p>
-        <ul>
-          <li>Guest writes at midnight → waits until you wake up</li>
-          <li>Foreign-language messages → copy-paste into a translator</li>
-          <li>Every routine question lands on you</li>
-        </ul>
-      </div>
-      <div class="gap-card">
-        <span class="tag tag-mid">Partial AI · $29–$99/mo</span>
-        <h3>Big international tools</h3>
-        <p>Priced for the US market — and even on top plans, the AI won't auto-answer the questions that matter most.</p>
-        <ul>
-          <li>No auto-answers for early check-in or late checkout</li>
-          <li>No auto-answers for availability or payments</li>
-          <li>You still handle every money question yourself</li>
-        </ul>
-      </div>
-      <div class="gap-card">
-        <span class="tag tag-yes">Built for this</span>
-        <h3>StayLingo</h3>
-        <p>Plugs into your Beds24 setup today — the Smoobu connection follows next — and answers the hard questions for real.</p>
-        <ul>
-          <li>Checks the <b>real calendar + cleaning schedule</b> before promising an early check-in</li>
-          <li>Sells late checkout with a payment link, in the chat</li>
-          <li>Replies in the guest's language in under a minute</li>
-        </ul>
-      </div>
-    </div>
-    <div class="safety-strip">
-      <span class="shield" aria-hidden="true">🛡️</span>
-      <p><b>Some things are never auto-answered.</b> Complaints, refund requests and emergencies are escalated to you instantly with a WhatsApp alert — StayLingo only handles what it's safe to handle, and you always see everything in English.</p>
-    </div>
-  </div>
-</section>
+<section><div class="wrap">
+<p class="kicker">Why hosts switch</p>
+<h2 class="title">Everything a night manager does. None of the payroll.</h2>
+<div class="grid g3">
+<div class="card"><div class="ic">🌍</div><h3>Replies in their language</h3><p>German, French, Dutch, Polish — 30+ languages, answered natively. You read everything in English. <a href="languages.html" style="color:var(--amber)">See all languages →</a></p></div>
+<div class="card"><div class="ic">📅</div><h3>Checks your real calendar</h3><p>Early check-in? Late arrival? StayLingo checks Beds24/Smoobu availability before it promises anything.</p></div>
+<div class="card"><div class="ic">💶</div><h3>Sells while you sleep</h3><p>Late checkout offered at the perfect moment, with a payment link in the chat. One €25 upsell covers nearly 3 months of StayLingo.</p></div>
+<div class="card"><div class="ic">🛡️</div><h3>Never guesses on the serious stuff</h3><p>Complaints, refunds and emergencies are never auto-answered — you get an instant WhatsApp alert instead.</p></div>
+<div class="card"><div class="ic">⚡</div><h3>Under a minute, 24/7</h3><p>Guests judge you on reply speed. StayLingo answers in under 60 seconds — at 3 PM and at 3 AM.</p></div>
+<div class="card"><div class="ic">📥</div><h3>One calm inbox</h3><p>Airbnb and Booking.com messages in one place, translated, with the full conversation history. <a href="services.html" style="color:var(--amber)">All services →</a></p></div>
+</div></div></section>
 
-<!-- ============ HOW IT WORKS ============ -->
-<section class="how-section" id="how">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow"><span class="dot"></span> How it works</span>
-      <h2>Live in about 10 minutes. No new software to learn.</h2>
-      <p>StayLingo sits on top of the channel manager you already use. Your bookings, calendar and channels don't change.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="num">1</div>
-        <h3>Connect Beds24</h3>
-        <p>Link your existing Beds24 account in a couple of clicks — your listings, calendar and guest messages flow in automatically. Smoobu connection follows next.</p>
-      </div>
-      <div class="step">
-        <div class="num">2</div>
-        <h3>Add your property knowledge</h3>
-        <p>Wi-Fi code, check-in instructions, parking, house rules, your best local tips. A guided setup takes about 10 minutes per property — that's everything StayLingo needs.</p>
-      </div>
-      <div class="step">
-        <div class="num">3</div>
-        <h3>Start safe, then go hands-free</h3>
-        <p>Begin in draft mode, approve each reply with one tap, and switch to auto-send whenever you're ready.</p>
-      </div>
-    </div>
-    <div class="mode-bar">
-      <div class="mode"><b>✎ Draft mode</b><p>StayLingo writes every reply, you approve with 1 tap. Perfect for your first days — and still in the guest's language, instantly.</p></div>
-      <div class="mode-arrow" aria-hidden="true">→</div>
-      <div class="mode"><b>⚡ Auto-send mode</b><p>Replies go out in under a minute, 24/7. You read everything in English, and WhatsApp alerts you only when a human is needed.</p></div>
-    </div>
-  </div>
-</section>
+<section><div class="wrap">
+<p class="kicker">Languages</p>
+<h2 class="title">Your guests' languages. Covered.</h2>
+<div class="langs">
+<span class="lang">🇩🇪 German</span><span class="lang">🇫🇷 French</span><span class="lang">🇳🇱 Dutch</span><span class="lang">🇮🇹 Italian</span><span class="lang">🇪🇸 Spanish</span><span class="lang">🇵🇱 Polish</span><span class="lang">🇵🇹 Portuguese</span><span class="lang">🇬🇧 English</span><span class="lang">🇸🇪 Swedish</span><span class="lang">🇩🇰 Danish</span><span class="lang">🇨🇿 Czech</span><span class="lang">+ 20 more</span>
+</div>
+<p class="lede" style="margin-top:26px"><a href="languages.html" style="color:var(--amber);font-weight:700">Explore the language guide →</a></p>
+</div></section>
 
-<!-- ============ PRICING ============ -->
-<section id="pricing">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow"><span class="dot"></span> Pricing</span>
-      <h2>Less than one late checkout pays for.</h2>
-      <p>Simple per-listing pricing. One Sunday late checkout sold by StayLingo covers Pro for the month.</p>
-    </div>
-    <div class="price-grid">
-      <div class="price-card">
-        <span class="plan">Starter</span>
-        <div class="amount">€14 <span>/ listing / month</span></div>
-        <ul>
-          <li>AI guest replies 24/7, in 30+ languages</li>
-          <li>Answers from your real calendar &amp; property info</li>
-          <li>Draft mode with 1-tap approval</li>
-          <li>Auto-send mode when you're ready</li>
-          <li>Full conversation shown to you in English</li>
-        </ul>
-      </div>
-      <div class="price-card pro">
-        <span class="pop">Full feature set</span>
-        <span class="plan">Pro</span>
-        <div class="amount">€24 <span>/ listing / month</span></div>
-        <ul>
-          <li>Everything in Starter</li>
-          <li>Early check-in &amp; late checkout upsells with payment links in chat</li>
-          <li>Automatic review replies</li>
-          <li>WhatsApp alerts when a human is needed</li>
-          <li>Priority support</li>
-        </ul>
-      </div>
-    </div>
-    <div class="founding">
-      <div>
-        <h3>Founding hosts: a better deal, for the first 20 only</h3>
-        <p>We're onboarding <b>20 founding hosts</b> first. You get your <b>first month completely free</b> — and in exchange for a short testimonial once you've used it, your price is locked for life.</p>
-      </div>
-      <div class="deal">
-        <div class="old">Regular · from €14 / listing / month</div>
-        <div class="new">€9</div>
-        <span>per listing / month · locked for life<br>after your free first month</span>
-      </div>
-    </div>
-  </div>
-</section>
+<section><div class="wrap"><div class="offer">
+<p class="kicker">Founding hosts — 20 spots</p>
+<h2>First month free. Then <span class="price-big">€9</span>/listing — locked for life.</h2>
+<p>Public price will be €14–€24 per listing. Founding hosts keep €9 forever, in exchange for honest feedback. When the 20 spots are gone, they're gone.</p>
+<div class="cta-row"><a class="btn btn-amber" href="pricing.html">See pricing</a><a class="btn btn-ghost" href="signup.html">Create your account</a></div>
+</div></div></section>
 
-<!-- ============ FOUNDING CTA ============ -->
-<section class="cta-section" id="founding">
-  <div class="wrap">
-    <div class="cta-card">
-      <h2>Claim one of the <span class="hl">20 founding spots</span></h2>
-      <p>No forms, no card, no commitment. Send us one short message and we'll personally set up your first listing with you — free for the first month.</p>
-      <div class="spots">● Only 20 spots · first come, first served</div>
-      <div class="stay-box">
-        <label>Message us this word to claim your spot</label>
-        <div class="stay-row">
-          <div class="stay-word" id="stayWord">STAY</div>
-          <button class="copy-btn" id="copyBtn" type="button">Copy</button>
-        </div>
-        <p>Send <b>STAY</b> by DM to StayLingo on Instagram or Facebook, or in any of the Beds24 / Smoobu host groups where you found us — we'll reply with your founding setup link. Prefer email? Reply to any StayLingo message you've received with the same word.</p>
-        <p class="copy-msg" id="copyMsg" role="status"></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section id="faq" style="padding-top:16px">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow"><span class="dot"></span> FAQ</span>
-      <h2>Questions hosts ask us</h2>
-    </div>
-    <div class="faq-list">
-      <details>
-        <summary>Does it work with Booking.com too?</summary>
-        <p>Yes. StayLingo connects through your channel manager (Beds24 today, Smoobu next), so it answers guests from Airbnb, Booking.com and your other connected channels in one place — each guest in their own language.</p>
-      </details>
-      <details>
-        <summary>What languages does it speak?</summary>
-        <p>30+ languages, including German, French, Dutch, Italian, Spanish and Portuguese — the languages your European guests actually write in. StayLingo detects each guest's language automatically and shows you the full conversation translated into English.</p>
-      </details>
-      <details>
-        <summary>Can I review messages before they're sent?</summary>
-        <p>Yes. Start in draft mode: StayLingo prepares every reply and you approve it with one tap. Switch any listing to auto-send whenever you're ready — you can switch back at any time.</p>
-      </details>
-      <details>
-        <summary>How can it promise an early check-in?</summary>
-        <p>It doesn't guess. Before answering, StayLingo checks your real calendar and cleaning schedule, so an early check-in or late checkout is only offered when the property is actually free and cleanable in time. If it isn't, the guest gets an honest alternative instead.</p>
-      </details>
-      <details>
-        <summary>What does StayLingo never answer on its own?</summary>
-        <p>Complaints, refund requests and emergencies are never auto-answered. Those are escalated to you immediately with a WhatsApp alert, with the conversation translated into English so you can act fast.</p>
-      </details>
-      <details>
-        <summary>Is my guests' data safe?</summary>
-        <p>Yes — StayLingo is hosted in the EU and built on GDPR basics: guest data is used only to answer that guest, never sold or used for advertising, and you can request deletion of your data at any time.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <span><b>StayLingo</b> — AI guest messaging for European hosts. Beds24 now, Smoobu next.</span>
-    <span>Replies in under a minute · 30+ languages · Hosted in the EU</span>
-  </div>
-</footer>
+<footer><div class="wrap"><div class="foot">
+<div><a class="logo" href="index.html"><span class="dot">💬</span>Stay<em>Lingo</em></a><p style="margin-top:10px;max-width:300px">AI guest messaging for European hosts. Replies in 30+ languages, 24/7.</p></div>
+<div><strong style="color:#fff">Product</strong><br><a href="services.html">Services</a><br><a href="pricing.html">Pricing</a><br><a href="languages.html">Languages</a><br><a href="how-it-works.html">How it works</a></div>
+<div><strong style="color:#fff">Account</strong><br><a href="signup.html">Sign up</a><br><a href="login.html">Log in</a></div>
+<div><strong style="color:#fff">Contact</strong><br><a href="mailto:hello@staylingo.work.gd">hello@staylingo.work.gd</a><br><a href="https://www.instagram.com/staylingo.ai">Instagram: @staylingo.ai</a><br>DM “STAY” for a founding spot</div>
+</div><p class="small">© 2026 StayLingo · Built for Beds24 &amp; Smoobu hosts across Europe · EU hosting, GDPR-ready. Complaints, refunds and emergencies are always escalated to a human.</p></div></footer>
 
 <script>
-(function(){
-  var timers = [];
-  var playing = false;
-  var finished = true; /* page loads showing the completed conversation; Replay animates it */
-  var status = document.getElementById('demoStatus');
-  var chatGuest = document.getElementById('chatGuest');
-  var chatHost = document.getElementById('chatHost');
-  var tabGuest = document.getElementById('tabGuest');
-  var tabHost = document.getElementById('tabHost');
-  var paidBanner = document.getElementById('paidBanner');
-  var typing = document.getElementById('typing');
-  var replySpeed = document.getElementById('replySpeed');
-  var upsellBtn = document.getElementById('upsellBtn');
-  var clock = document.getElementById('phoneClock');
-  var title = document.getElementById('phoneTitle');
-  var sub = document.getElementById('phoneSub');
-
-  function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
-  function clearTimers(){ timers.forEach(clearTimeout); timers = []; }
-
-  function seqEl(n){ return chatGuest.querySelector('[data-seq="'+n+'"]'); }
-  function show(el){ if(el) el.classList.add('show'); }
-  function scrollChat(){ chatGuest.scrollTop = chatGuest.scrollHeight; }
-
-  function setView(host){
-    chatGuest.hidden = host;
-    chatHost.hidden = !host;
-    tabGuest.classList.toggle('active', !host);
-    tabHost.classList.toggle('active', host);
-    if(host){
-      clock.textContent = '08:04';
-      title.textContent = 'Your morning summary';
-      sub.textContent = 'Casa Limone · shown in English';
-    } else {
-      clock.textContent = finished ? '23:44' : '23:42';
-      title.textContent = 'Guest chat · Familie Weber';
-      sub.textContent = 'Casa Limone · Airbnb via Beds24';
-    }
-  }
-
-  function reset(){
-    clearTimers();
-    playing = false; finished = false;
-    [0,1,2,3,4].forEach(function(n){ var el = seqEl(n); if(el) el.classList.remove('show'); });
-    typing.classList.remove('on');
-    replySpeed.classList.remove('show');
-    paidBanner.classList.remove('show');
-    upsellBtn.classList.remove('done');
-    upsellBtn.textContent = 'Ja, 25 € bestätigen';
-    setView(false);
-    chatGuest.scrollTop = 0;
-  }
-
-  function play(){
-    reset();
-    playing = true;
-    status.textContent = 'Playing… 11:42 PM, Amalfi Coast. The host is asleep.';
-    later(function(){ show(seqEl(0)); scrollChat(); }, 300);
-    later(function(){ show(seqEl(1)); scrollChat(); status.textContent = 'Guest writes in German: delayed flight, asking for a 1 AM check-in.'; }, 1100);
-    later(function(){ typing.classList.add('on'); scrollChat(); status.textContent = 'StayLingo checks the calendar and cleaning schedule…'; }, 2200);
-    later(function(){
-      typing.classList.remove('on');
-      replySpeed.classList.add('show');
-      show(seqEl(2)); scrollChat();
-      clock.textContent = '23:43';
-      status.textContent = 'Replied in German in 38 seconds — self check-in, door code, parking.';
-    }, 3600);
-    later(function(){ show(seqEl(3)); scrollChat(); status.textContent = 'It also offers Sunday late checkout for €25 — bookable right in the chat.'; }, 4900);
-    later(function(){
-      upsellBtn.classList.add('done');
-      upsellBtn.textContent = '✓ Bestätigt · 25 € bezahlt';
-      status.textContent = 'The guest taps confirm — €25 paid, no host involved.';
-    }, 6400);
-    later(function(){
-      show(seqEl(4)); scrollChat();
-      clock.textContent = '23:44';
-      paidBanner.classList.add('show');
-    }, 7200);
-    later(function(){
-      status.textContent = 'Done. Switch to “Host view · EN” to see what the host wakes up to.';
-      playing = false; finished = true;
-    }, 8200);
-  }
-
-  document.getElementById('replayBtn').addEventListener('click', play);
-  tabGuest.addEventListener('click', function(){ setView(false); });
-  tabHost.addEventListener('click', function(){
-    setView(true);
-    if(finished || !playing){ paidBanner.classList.add('show'); }
-    status.textContent = 'Host view: the same conversation, in English — with the €25 upsell already collected.';
-  });
-
-  var started = false;
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting && !started){ started = true; play(); io.disconnect(); }
-      });
-    }, { threshold: 0.35 });
-    io.observe(document.getElementById('demo'));
-  } else {
-    play();
-  }
-
-  /* Copy STAY */
-  var copyBtn = document.getElementById('copyBtn');
-  var copyMsg = document.getElementById('copyMsg');
-  copyBtn.addEventListener('click', function(){
-    function done(){ copyMsg.textContent = '✓ Copied — now paste it into a DM to StayLingo to claim your spot.'; }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText('STAY').then(done, function(){ copyMsg.textContent = 'The word is STAY — just type it into a DM to StayLingo.'; });
-    } else {
-      var r = document.createRange();
-      r.selectNode(document.getElementById('stayWord'));
-      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
-      try { document.execCommand('copy'); done(); }
-      catch(e){ copyMsg.textContent = 'The word is STAY — just type it into a DM to StayLingo.'; }
-      sel.removeAllRanges();
-    }
-  });
-})();
+const script=[
+["sys","🌙 11:42 PM — New guest message · Airbnb"],
+["guest","Hallo! Unser Flug hat Verspätung, wir landen erst um 1 Uhr nachts. Ist ein Check-in um 1 Uhr möglich?"],
+["ai","Gute Nacht! Ja, ein Check-in um 1 Uhr ist möglich — ich habe Ihren Kalender geprüft. Die Tür öffnet sich mit Ihrem persönlichen Code, und ich sende Ihnen kurz vor der Landung die Wegbeschreibung. Gute Reise! ✈️ <span class='t'>StayLingo · replied in 38 seconds</span>"],
+["guest","Perfekt, danke! Können wir am Sonntag etwas später auschecken?"],
+["ai","Sehr gerne! Am Sonntag ist ein später Check-out bis 13 Uhr für 25 € möglich. Hier ist Ihr Zahlungslink — danach ist alles bestätigt: staylingo.pay/late <span class='t'>Upsell offered automatically</span>"],
+["sys","✅ Late checkout sold — €25 · Host notified on WhatsApp"],
+];
+const chat=document.getElementById('chat');
+function play(){chat.innerHTML='';script.forEach((m,i)=>{setTimeout(()=>{const d=document.createElement('div');d.className='msg '+m[0];d.innerHTML=m[1];chat.appendChild(d);requestAnimationFrame(()=>d.classList.add('show'));},500+i*1500);});}
+document.getElementById('replay').addEventListener('click',play);
+const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){play();io.disconnect();}},{threshold:.3});io.observe(chat);
 </script>
 </body>
 </html>
