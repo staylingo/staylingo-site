@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Your StayLingo host dashboard — account, founding status and listing connection." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<title>Dashboard — StayLingo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050b18;--bg2:#081426;--panel:rgba(255,255,255,.04);--line:rgba(255,255,255,.12);--ink:#eef2f8;--muted:#a8b6c9;--amber:#f5a623;--cyan:#38e1ff;--green:#2ee6a8;--red:#ff7a7a}
+*{box-sizing:border-box}body{margin:0;font-family:"Public Sans",system-ui,sans-serif;color:var(--ink);background:radial-gradient(1000px 550px at 85% -10%,rgba(56,225,255,.13),transparent 60%),radial-gradient(800px 500px at -10% 15%,rgba(245,166,35,.11),transparent 55%),linear-gradient(180deg,var(--bg),var(--bg2));line-height:1.6;min-height:100vh}
+h1,h2{font-family:"Bricolage Grotesque",sans-serif;line-height:1.08;margin:0}p{margin:0}a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(5,11,24,.72);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:26px;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:21px}
+.logo .dot{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--amber),#ff7847);display:grid;place-items:center;font-size:18px}
+.logo em{font-style:normal;color:var(--amber)}
+.links{display:flex;gap:22px;margin-left:auto;font-size:14.5px;font-weight:600;color:var(--muted)}.links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:12px 22px;font-weight:700;font-size:14.5px;border:1.5px solid transparent;cursor:pointer}
+.btn-amber{background:linear-gradient(135deg,var(--amber),#ff8a3d);color:#1a1200;box-shadow:0 10px 26px rgba(245,166,35,.35)}
+.btn-ghost{background:transparent;color:#fff;border-color:var(--line)}
+.btn-sm{padding:9px 18px}
+.dash{max-width:920px;margin:44px auto 70px}
+.hello{margin-bottom:26px}
+.hello h1{font-size:34px;margin-bottom:6px}
+.hello .sub{color:var(--muted);font-size:15.5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.links{display:none}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:26px;backdrop-filter:blur(10px)}
+.card.wide{grid-column:1/-1}
+.card h2{font-size:19px;margin-bottom:14px}
+.kv{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:14.5px}
+.kv:last-child{border-bottom:none}
+.kv .k{color:var(--muted)}.kv .v{font-weight:600;text-align:right}
+.badge{display:inline-block;background:rgba(245,166,35,.14);border:1px solid rgba(245,166,35,.5);color:var(--amber);border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:700}
+.step{display:flex;gap:14px;padding:10px 0}
+.step .n{flex:0 0 30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;background:rgba(56,225,255,.12);border:1px solid rgba(56,225,255,.4);color:var(--cyan)}
+.step.done .n{background:rgba(46,230,168,.15);border-color:rgba(46,230,168,.5);color:var(--green)}
+.step p{font-size:14.5px;color:var(--muted)}.step p b{color:#fff}
+label{display:block;font-size:13.5px;font-weight:600;margin:14px 0 6px}
+input,select{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:#fff;font-size:15px;font-family:inherit}
+select option{color:#111}
+.note{margin-top:16px;background:rgba(56,225,255,.07);border:1px solid rgba(56,225,255,.3);border-radius:14px;padding:13px 15px;font-size:13.5px;color:var(--muted)}
+.note b{color:#fff}
+.okmsg{display:none;background:rgba(46,230,168,.1);border:1px solid rgba(46,230,168,.45);border-radius:14px;padding:12px 15px;font-size:14px;margin-top:14px}
+.hidden{display:none}
+.loading{max-width:460px;margin:90px auto;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="index.html"><span class="dot">💬</span>Stay<em>Lingo</em></a>
+<nav class="links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="languages.html">Languages</a><a href="how-it-works.html">How it works</a><a href="dashboard.html">Dashboard</a></nav>
+<button class="btn btn-ghost btn-sm" id="signOutBtnTop">Sign out</button>
+</div></header>
+
+<div class="wrap" id="loadingZone"><div class="loading">⏳ Bringing you inside…</div></div>
+
+<div class="wrap dash hidden" id="dashZone">
+<div class="hello">
+<h1>👋 Welcome, <span id="helloName">host</span></h1>
+<p class="sub">You're inside StayLingo. This is your home base — your account, your founding status, and your listing connection.</p>
+</div>
+
+<div class="grid">
+<div class="card">
+<h2>🏡 Your host profile</h2>
+<div class="kv"><span class="k">Name</span><span class="v" id="pName">—</span></div>
+<div class="kv"><span class="k">Account</span><span class="v" id="pAccount">—</span></div>
+<div class="kv"><span class="k">Phone / WhatsApp</span><span class="v" id="pPhoneV">—</span></div>
+<div class="kv"><span class="k">Channel manager</span><span class="v" id="pCmV">—</span></div>
+<div class="kv"><span class="k">Listings</span><span class="v" id="pCountV">—</span></div>
+<form id="detailsForm" class="hidden">
+<label for="dPhone">Phone / WhatsApp</label><input id="dPhone" type="tel" placeholder="+39 …">
+<label for="dCm">Channel manager</label><select id="dCm"><option>Beds24</option><option>Smoobu</option><option>Other / not yet</option></select>
+<label for="dCount">How many listings?</label><select id="dCount"><option>1–3</option><option>4–10</option><option>11–25</option><option>25+</option></select>
+<div style="height:14px"></div>
+<button class="btn btn-amber" type="submit" style="width:100%">Save my host details</button>
+</form>
+<div class="okmsg" id="savedMsg">✅ Details saved — thank you!</div>
+</div>
+
+<div class="card">
+<h2>🌙 Founding status</h2>
+<p style="margin-bottom:12px"><span class="badge">FOUNDING HOST</span></p>
+<div class="kv"><span class="k">Your price</span><span class="v">€9/listing — locked for life</span></div>
+<div class="kv"><span class="k">First month</span><span class="v">Free</span></div>
+<div class="kv"><span class="k">Card required</span><span class="v">No</span></div>
+<div class="note">Your rate never goes up — even when public pricing does. Questions? <b>hello@staylingo.work.gd</b> or DM “STAY” to <b>@staylingo.ai</b>.</div>
+</div>
+
+<div class="card wide">
+<h2>🚀 Your activation</h2>
+<div class="step done"><div class="n">✓</div><p><b>Account created.</b> You're signed in and on the founding list.</p></div>
+<div class="step"><div class="n">2</div><p><b>We connect your listings — personally.</b> Founding hosts are onboarded by a human, not a form. Watch your inbox for a welcome email from <b>hello@staylingo.work.gd</b> within 24 hours — or DM “STAY” to <b>@staylingo.ai</b> to jump the queue.</p></div>
+<div class="step"><div class="n">3</div><p><b>Your guest inbox goes live here.</b> Once connected, StayLingo answers your guests in their own language, 24/7 — and every conversation appears in this dashboard, in English.</p></div>
+</div>
+
+<div class="card wide">
+<h2>💬 See it working</h2>
+<p style="color:var(--muted);font-size:14.5px;margin-bottom:14px">The midnight demo on our home page shows exactly what your guests will experience — a German guest, a 1 AM check-in, an answer in 38 seconds, and a €25 late-checkout upsell.</p>
+<a class="btn btn-amber" href="index.html">Watch the demo →</a>
+<button class="btn btn-ghost" id="signOutBtn" style="margin-left:10px">Sign out</button>
+</div>
+</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = { apiKey: "AIzaSyDbop69CYu20MpSgTnw8-pWXh9T4TSZgm8", authDomain: "staylingo-79c46.firebaseapp.com", projectId: "staylingo-79c46", storageBucket: "staylingo-79c46.firebasestorage.app", messagingSenderId: "322556880973", appId: "1:322556880973:web:cf28e535056575a7d59404" };
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const $ = id => document.getElementById(id);
+
+onAuthStateChanged(auth, async user => {
+  if(!user){ location.replace('login.html'); return; }
+  let profile = {};
+  try{ const snap = await getDoc(doc(db,'users',user.uid)); if(snap.exists()) profile = snap.data(); }catch(e){}
+  const name = profile.name || user.displayName || '';
+  $('helloName').textContent = name ? name.split(' ')[0] : 'host';
+  $('pName').textContent = name || '—';
+  $('pAccount').textContent = user.email || user.phoneNumber || '—';
+  $('pPhoneV').textContent = profile.phone || user.phoneNumber || '—';
+  $('pCmV').textContent = profile.channelManager || '—';
+  $('pCountV').textContent = profile.listings || '—';
+  const needsDetails = !profile.channelManager || !profile.listings;
+  $('detailsForm').classList.toggle('hidden', !needsDetails);
+  if(profile.phone) $('dPhone').value = profile.phone;
+  $('loadingZone').classList.add('hidden');
+  $('dashZone').classList.remove('hidden');
+});
+
+$('detailsForm').addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const user = auth.currentUser; if(!user) return;
+  const data = { phone: $('dPhone').value.trim(), channelManager: $('dCm').value, listings: $('dCount').value };
+  try{ await setDoc(doc(db,'users',user.uid), data, { merge:true }); }catch(e){}
+  $('pPhoneV').textContent = data.phone || '—';
+  $('pCmV').textContent = data.channelManager;
+  $('pCountV').textContent = data.listings;
+  $('detailsForm').classList.add('hidden');
+  $('savedMsg').style.display = 'block';
+});
+
+async function doSignOut(){ try{ await signOut(auth); }catch(e){} location.replace('index.html'); }
+$('signOutBtn').addEventListener('click', doSignOut);
+$('signOutBtnTop').addEventListener('click', doSignOut);
+</script>
+</body>
+</html>

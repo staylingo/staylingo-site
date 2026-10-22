@@ -116,7 +116,7 @@ function friendly(e){ const m = (e && e.message) || String(e);
   return m; }
 
 onAuthStateChanged(auth, user => {
-  if(user){ $('formZone').classList.add('hidden'); $('signedZone').classList.remove('hidden'); $('whoEmail').textContent = user.email || user.phoneNumber || 'your account'; }
+  if(user){ $('formZone').classList.add('hidden'); $('signedZone').classList.remove('hidden'); $('whoEmail').textContent = user.email || user.phoneNumber || 'your account'; setTimeout(() => location.replace('dashboard.html'), 700); }
   else { $('formZone').classList.remove('hidden'); $('signedZone').classList.add('hidden'); }
 });
 

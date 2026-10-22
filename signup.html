@@ -134,9 +134,8 @@ onAuthStateChanged(auth, async user => {
     $('formZone').classList.add('hidden');
     $('signedZone').classList.remove('hidden');
     $('whoEmail').textContent = user.email || user.phoneNumber || 'your account';
-    let has = false;
-    try{ const snap = await getDoc(doc(db,'users',user.uid)); has = snap.exists(); }catch(e){}
-    $('profileForm').classList.toggle('hidden', has);
+    $('profileForm').classList.add('hidden');
+    setTimeout(() => location.replace('dashboard.html'), 1600);
   } else {
     $('formZone').classList.remove('hidden');
     $('signedZone').classList.add('hidden');
