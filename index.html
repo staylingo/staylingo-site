@@ -9,7 +9,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="StayLingo" />
 <meta property="og:title" content="StayLingo — AI Guest Messaging for European Hosts" />
-<meta property="og:description" content="Your guests write in German, French, Dutch — StayLingo answers in their language in under a minute, 24/7. For Beds24 & Smoobu hosts. Founding hosts: first month free." />
+<meta property="og:description" content="Your guests write in German, French, Dutch — StayLingo answers in their language in under a minute, 24/7. For Beds24 & Smoobu hosts. Founding hosts: first week free." />
 <meta property="og:url" content="https://staylingo.work.gd/" />
 <meta property="og:image" content="https://staylingo.work.gd/favicon.png" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -19,7 +19,7 @@
 <link rel="icon" type="image/png" href="/favicon.png" />
 <title>StayLingo — AI Guest Messaging for European Hosts</title>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"StayLingo","url":"https://staylingo.work.gd/","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"AI guest messaging for European Airbnb hosts and property managers on Beds24 and Smoobu. Replies to guests in their own language in under a minute, 24/7.","offers":{"@type":"Offer","price":"14","priceCurrency":"EUR","description":"From €14 per listing per month. Founding hosts: €9 per listing locked for life, first month free."},"sameAs":["https://www.instagram.com/staylingo.ai"]}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"StayLingo","url":"https://staylingo.work.gd/","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"AI guest messaging for European Airbnb hosts and property managers on Beds24 and Smoobu. Replies to guests in their own language in under a minute, 24/7.","offers":{"@type":"Offer","price":"14","priceCurrency":"EUR","description":"From €14 per listing per month. Founding hosts: €9 per listing locked for life, first week free."},"sameAs":["https://www.instagram.com/staylingo.ai"]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,9 +35,11 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rg
 .nav{display:flex;align-items:center;gap:26px;padding:14px 0}
 .logo{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:21px}
 .logo .dot{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--amber),#ff7847);display:grid;place-items:center;font-size:18px;box-shadow:0 6px 18px rgba(245,166,35,.45)}
-.logo em{font-style:normal;color:var(--amber)}
+.logo em{font-style:normal;color:#f2a97e}
 .links{display:flex;gap:22px;margin-left:auto;font-size:14.5px;font-weight:600;color:var(--muted)}
 .links a:hover{color:#fff}
+.login-link{font-size:14.5px;font-weight:600;color:var(--muted)}
+.login-link:hover{color:#fff}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:12px 22px;font-weight:700;font-size:14.5px;border:1.5px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s}
 .btn:active{transform:scale(.98)}
 .btn-amber{background:linear-gradient(135deg,var(--amber),#ff8a3d);color:#1a1200;box-shadow:0 10px 26px rgba(245,166,35,.35)}
@@ -52,7 +54,7 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rg
 .hero .sub{color:var(--muted);font-size:clamp(16px,2vw,19px);max-width:680px;margin:0 auto 30px}
 .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .trust{margin-top:22px;color:var(--muted);font-size:13.5px}
-section{padding:64px 0}
+section{padding:64px 0;scroll-margin-top:84px}
 .kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);text-align:center}
 h2.title{font-size:clamp(30px,4.4vw,46px);font-weight:800;text-align:center;margin:12px auto 14px;max-width:760px}
 .lede{color:var(--muted);text-align:center;max-width:640px;margin:0 auto 40px}
@@ -63,6 +65,10 @@ h2.title{font-size:clamp(30px,4.4vw,46px);font-weight:800;text-align:center;marg
 .card .ic{font-size:26px;margin-bottom:12px}
 .card h3{font-size:19px;margin-bottom:8px}
 .card p{color:var(--muted);font-size:15px}
+.card ul{margin:10px 0 0;padding-left:18px}
+.card li{color:var(--muted);font-size:15px;margin:5px 0}
+.tag{display:inline-block;margin-top:14px;padding:4px 12px;border-radius:999px;background:rgba(46,230,168,.13);color:var(--green);font-size:12.5px;font-weight:700}
+.tag.a{background:rgba(245,166,35,.14);color:var(--amber2)}
 .demo-shell{max-width:520px;margin:0 auto;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .phone{background:#0a1626;border-radius:20px;padding:18px;min-height:430px;display:flex;flex-direction:column;gap:10px}
 .msg{max-width:82%;padding:11px 14px;border-radius:16px;font-size:14.5px;line-height:1.45;opacity:0;transform:translateY(8px);transition:all .45s ease}
@@ -74,33 +80,59 @@ h2.title{font-size:clamp(30px,4.4vw,46px);font-weight:800;text-align:center;marg
 .demo-bar{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
 .demo-bar .lbl{font-size:13px;color:var(--muted)}
 .pill{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(46,230,168,.14);color:var(--green);font-size:12px;font-weight:700}
-.langs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.lang{padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:14px;font-weight:600}
+.steps{max-width:840px;margin:0 auto;display:grid;gap:16px}
+.step{display:flex;gap:20px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px}
+.step .n{flex:0 0 52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--amber),#ff8a3d);color:#1a1200;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:24px;display:grid;place-items:center}
+.step h3{font-size:20px;margin-bottom:6px}.step p{color:var(--muted);font-size:15px}
+.guide{max-width:840px;margin:0 auto;display:grid;gap:14px}
+.guide .g{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.guide h3{font-size:17px;margin-bottom:6px}.guide p{color:var(--muted);font-size:15px}
+.langs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:900px;margin:0 auto}
+.lang{padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:15px;font-weight:600}
+.lang.hot{border-color:rgba(245,166,35,.55);background:rgba(245,166,35,.1)}
+.examples{max-width:820px;margin:0 auto;display:grid;gap:14px}
+.ex{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.ex .from{font-size:12.5px;color:var(--cyan);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.ex .q{font-size:17px;margin:6px 0 4px}
+.ex .a{color:var(--muted);font-size:14.5px}
+.ex .a b{color:var(--green);font-weight:600}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:32px 28px;position:relative}
+.plan.hot{border-color:rgba(245,166,35,.55);background:linear-gradient(160deg,rgba(245,166,35,.12),rgba(255,255,255,.03))}
+.plan .name{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;color:var(--muted)}
+.plan .price{font-family:"Bricolage Grotesque",sans-serif;font-size:52px;font-weight:800;margin:10px 0 2px}
+.plan .per{color:var(--muted);font-size:14px}
+.plan ul{list-style:none;padding:0;margin:20px 0 26px}.plan li{padding:7px 0;color:var(--muted);font-size:15px;border-bottom:1px dashed rgba(255,255,255,.07)}
+.plan li b{color:#fff;font-weight:600}
+.badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--amber),#ff8a3d);color:#1a1200;font-weight:800;font-size:12px;padding:5px 14px;border-radius:999px;white-space:nowrap}
+.faq{max-width:760px;margin:0 auto}
+.faq .q{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:12px}
+.faq h3{font-size:17px;margin-bottom:6px}.faq p{color:var(--muted);font-size:15px}
 .offer{background:linear-gradient(135deg,rgba(245,166,35,.16),rgba(56,225,255,.08));border:1px solid rgba(245,166,35,.4);border-radius:28px;padding:44px 30px;text-align:center}
 .offer h2{font-size:clamp(28px,4vw,42px);margin-bottom:12px}
 .offer p{color:var(--muted);max-width:560px;margin:0 auto 24px}
+.offer .cta-line{margin:20px auto 0;font-size:14.5px}
+.offer .cta-line a{color:var(--amber);font-weight:700}
 .price-big{font-family:"Bricolage Grotesque",sans-serif;font-size:56px;font-weight:800;color:var(--amber2)}
 footer{border-top:1px solid var(--line);padding:44px 0 34px;color:var(--muted);font-size:14px}
 .foot{display:flex;gap:28px;flex-wrap:wrap;justify-content:space-between}
 .foot a:hover{color:#fff}
 .small{font-size:12.5px;color:#7286a0;margin-top:22px}
-@media(max-width:860px){.g3,.g2{grid-template-columns:1fr}.links{display:none}.hero{padding:56px 0 20px}}
+@media(max-width:860px){.g3,.g2{grid-template-columns:1fr}.links{display:none}.hero{padding:56px 0 20px}.step{flex-direction:column}}
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
-<a class="logo" href="index.html"><span class="dot">💬</span>Stay<em>Lingo</em></a>
-<nav class="links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="languages.html">Languages</a><a href="how-it-works.html">How it works</a></nav>
-<a class="btn btn-ghost btn-sm" href="login.html">Log in</a>
-<a class="btn btn-amber btn-sm" href="signup.html">Get started</a>
+<a class="logo" href="index.html"><span class="dot"><img src="/logo.png" alt="StayLingo" style="width:100%;height:100%;display:block;border-radius:11px"></span>Stay<em>Lingo</em></a>
+<nav class="links"><a href="#services">Services</a><a href="#how">How it works</a><a href="#languages">Languages</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav>
+<a class="login-link" href="login.html">Log in</a><a class="btn btn-amber btn-sm" href="signup.html">Get started</a>
 </div></header>
 
 <div class="wrap hero">
 <span class="eyebrow">✦ AI guest messaging · Beds24 &amp; Smoobu</span>
 <h1>Your guests write at midnight. <span class="grad">StayLingo answers in seconds.</span></h1>
 <p class="sub">The AI front desk for European Airbnb hosts and property managers. It replies to every guest in their own language — in under a minute, 24/7 — checks your real calendar, and sells late checkout while you sleep.</p>
-<div class="cta-row"><a class="btn btn-amber" href="signup.html">Claim a founding spot →</a><a class="btn btn-ghost" href="#demo">▶ Watch the 40-second demo</a></div>
-<p class="trust">First month free · €9/listing locked for life for the first 20 hosts · No card needed</p>
+<div class="cta-row"><a class="btn btn-amber" href="signup.html">Start your free week →</a><a class="btn btn-ghost" href="#how">See how it works</a></div>
+<p class="trust">First week free · €9/listing locked for life for the first 20 hosts · No card needed</p>
 </div>
 
 <section id="demo"><div class="wrap">
@@ -115,32 +147,105 @@ footer{border-top:1px solid var(--line);padding:44px 0 34px;color:var(--muted);f
 <p class="kicker">Why hosts switch</p>
 <h2 class="title">Everything a night manager does. None of the payroll.</h2>
 <div class="grid g3">
-<div class="card"><div class="ic">🌍</div><h3>Replies in their language</h3><p>German, French, Dutch, Polish — 30+ languages, answered natively. You read everything in English. <a href="languages.html" style="color:var(--amber)">See all languages →</a></p></div>
+<div class="card"><div class="ic">🌍</div><h3>Replies in their language</h3><p>German, French, Dutch, Polish — 30+ languages, answered natively. You read everything in English. <a href="#languages" style="color:var(--amber)">See all languages →</a></p></div>
 <div class="card"><div class="ic">📅</div><h3>Checks your real calendar</h3><p>Early check-in? Late arrival? StayLingo checks Beds24/Smoobu availability before it promises anything.</p></div>
 <div class="card"><div class="ic">💶</div><h3>Sells while you sleep</h3><p>Late checkout offered at the perfect moment, with a payment link in the chat. One €25 upsell covers nearly 3 months of StayLingo.</p></div>
 <div class="card"><div class="ic">🛡️</div><h3>Never guesses on the serious stuff</h3><p>Complaints, refunds and emergencies are never auto-answered — you get an instant WhatsApp alert instead.</p></div>
 <div class="card"><div class="ic">⚡</div><h3>Under a minute, 24/7</h3><p>Guests judge you on reply speed. StayLingo answers in under 60 seconds — at 3 PM and at 3 AM.</p></div>
-<div class="card"><div class="ic">📥</div><h3>One calm inbox</h3><p>Airbnb and Booking.com messages in one place, translated, with the full conversation history. <a href="services.html" style="color:var(--amber)">All services →</a></p></div>
+<div class="card"><div class="ic">📥</div><h3>One calm inbox</h3><p>Airbnb and Booking.com messages in one place, translated, with the full conversation history. <a href="#services" style="color:var(--amber)">All services →</a></p></div>
 </div></div></section>
 
-<section><div class="wrap">
-<p class="kicker">Languages</p>
-<h2 class="title">Your guests' languages. Covered.</h2>
-<div class="langs">
-<span class="lang">🇩🇪 German</span><span class="lang">🇫🇷 French</span><span class="lang">🇳🇱 Dutch</span><span class="lang">🇮🇹 Italian</span><span class="lang">🇪🇸 Spanish</span><span class="lang">🇵🇱 Polish</span><span class="lang">🇵🇹 Portuguese</span><span class="lang">🇬🇧 English</span><span class="lang">🇸🇪 Swedish</span><span class="lang">🇩🇰 Danish</span><span class="lang">🇨🇿 Czech</span><span class="lang">+ 20 more</span>
+<section id="services"><div class="wrap">
+<p class="kicker">Services</p>
+<h2 class="title">A full front desk, working every hour you don't.</h2>
+<p class="lede">Six services, one subscription. Every one of them exists to answer a single question hosts ask us: “who replies to my guests when I'm not there?”</p>
+<div class="grid g2">
+<div class="card"><div class="ic">🌍</div><h3>1 · Multilingual AI replies</h3><p>Every guest message answered in the guest's own language — in under a minute, 24/7. Trained on real host conversations: directions, Wi-Fi, parking, check-in codes, local tips.</p><ul><li>30+ languages, native-level tone</li><li>Your house rules and your voice, not a robot's</li><li>You read everything in English</li></ul><span class="tag">Included in Starter &amp; Pro</span></div>
+<div class="card"><div class="ic">📅</div><h3>2 · Calendar-checked answers</h3><p>Connected to your Beds24 or Smoobu calendar, StayLingo checks real availability before answering availability questions — so it never promises a 1 AM check-in you can't honour.</p><ul><li>Early check-in / late arrival checks</li><li>Extra-night offers when the calendar is free</li><li>Airbnb + Booking.com through your channel manager</li></ul><span class="tag">Included in Starter &amp; Pro</span></div>
+<div class="card"><div class="ic">💶</div><h3>3 · Automatic upsells</h3><p>Late checkout, early check-in, extra cleaning, airport transfer — offered at the moment the guest is most likely to say yes, with a payment link right in the chat.</p><ul><li>You set the prices; StayLingo does the selling</li><li>Payment confirmed before anything is promised</li></ul><span class="tag a">Pro · and for founding hosts</span></div>
+<div class="card"><div class="ic">🛡️</div><h3>4 · Human safety net</h3><p>Some messages should never be automated. Complaints, refund requests, damage reports and emergencies are <strong style="color:#fff">never</strong> auto-answered — they go straight to you on WhatsApp with a suggested reply.</p><ul><li>Instant WhatsApp alert to the host</li><li>Draft reply written for you to approve</li></ul><span class="tag">Included in Starter &amp; Pro</span></div>
+<div class="card"><div class="ic">📥</div><h3>5 · One translated inbox</h3><p>Every conversation from every channel in a single view — original language and English side by side, full history, nothing lost between apps.</p><ul><li>Searchable conversation history</li><li>See exactly what the AI said, any time</li><li>Take over a conversation with one tap</li></ul><span class="tag">Included in Starter &amp; Pro</span></div>
+<div class="card"><div class="ic">🤝</div><h3>6 · Founding-host onboarding</h3><p>We set up your first listing with you: house rules, check-in instructions, upsell prices, tone of voice. Ten minutes on a call, then it runs itself.</p><ul><li>Personal setup for the first 20 hosts</li><li>Honest feedback loop — you shape the product</li></ul><span class="tag a">Founding hosts only</span></div>
+</div></div></section>
+
+<section id="how"><div class="wrap">
+<p class="kicker">How it works · Guidance</p>
+<h2 class="title">Live in an afternoon. Silent ever after.</h2>
+<p class="lede">No new app for your guests, no new habits for you. StayLingo sits inside the tools you already use — here's the whole journey, honestly, step by step.</p>
+<div class="steps">
+<div class="step"><div class="n">1</div><div><h3>Create your account</h3><p>Sign up with Google, email or phone on the <a href="signup.html" style="color:var(--amber)">sign-up page</a>. Founding hosts are activated personally — we onboard the first 20 one by one, so your setup is done <em>with</em> you, not dumped on you.</p></div></div>
+<div class="step"><div class="n">2</div><div><h3>Connect Beds24 or Smoobu</h3><p>One secure connection to your channel manager. That's how StayLingo reads your real calendar and reaches the guest messages from Airbnb and Booking.com — no passwords shared, disconnect any time.</p></div></div>
+<div class="step"><div class="n">3</div><div><h3>Teach it your property (10 minutes)</h3><p>Check-in instructions, door codes, Wi-Fi, parking, house rules, your upsell prices and your tone — warm, formal, playful. StayLingo answers as <em>you</em>, in 30+ languages.</p></div></div>
+<div class="step"><div class="n">4</div><div><h3>Guests write. It answers.</h3><p>Every message answered in under a minute, in the guest's language, calendar-checked. Upsells offered with payment links when the moment is right.</p></div></div>
+<div class="step"><div class="n">5</div><div><h3>You watch — in English</h3><p>Your inbox shows every conversation translated. Jump in and take over any chat with one tap; StayLingo politely steps aside.</p></div></div>
+<div class="step"><div class="n">6</div><div><h3>Serious things find you instantly</h3><p>Complaints, refunds, emergencies: never auto-answered. You get a WhatsApp alert with a suggested reply, and you decide. That's the rule — it never changes.</p></div></div>
 </div>
-<p class="lede" style="margin-top:26px"><a href="languages.html" style="color:var(--amber);font-weight:700">Explore the language guide →</a></p>
+<div class="guide" style="margin-top:48px">
+<p class="kicker">Host guidance</p>
+<h2 style="text-align:center;font-size:32px;margin:10px 0 26px">Get the most from StayLingo</h2>
+<div class="g"><h3>📝 Write your house guide once</h3><p>The better your guide (parking spot, quiet hours, best bakery nearby), the better every answer in every language. Ten minutes here saves you hundreds of replies.</p></div>
+<div class="g"><h3>💶 Price your upsells honestly</h3><p>Late checkout at €20–€30 converts best across Europe. StayLingo offers it only when the next guest's arrival makes it safe.</p></div>
+<div class="g"><h3>👀 Glance at the inbox weekly</h3><p>Not to work — to spot patterns. Three guests asking about the same thing means your listing page needs one new sentence. We'll point it out.</p></div>
+<div class="g"><h3>🛡️ Keep the safety rule sacred</h3><p>If a message ever feels wrong, take over. Human judgment always outranks the AI — in the product, not just in this text.</p></div>
+</div>
 </div></section>
+
+<section id="languages"><div class="wrap">
+<p class="kicker">Languages we speak</p>
+<h2 class="title">Guests feel at home. In their own words.</h2>
+<p class="lede">Europe's guests don't write in English — they write in theirs. StayLingo detects the language instantly and answers like a local, while you follow everything in English.</p>
+<div class="langs">
+<span class="lang hot">🇩🇪 German</span><span class="lang hot">🇫🇷 French</span><span class="lang hot">🇳🇱 Dutch</span><span class="lang">🇬🇧 English</span><span class="lang">🇮🇹 Italian</span><span class="lang">🇪🇸 Spanish</span><span class="lang">🇵🇹 Portuguese</span><span class="lang">🇵🇱 Polish</span><span class="lang">🇸🇪 Swedish</span><span class="lang">🇩🇰 Danish</span><span class="lang">🇳🇴 Norwegian</span><span class="lang">🇫🇮 Finnish</span><span class="lang">🇨🇿 Czech</span><span class="lang">🇸🇰 Slovak</span><span class="lang">🇭🇺 Hungarian</span><span class="lang">🇷🇴 Romanian</span><span class="lang">🇬🇷 Greek</span><span class="lang">🇭🇷 Croatian</span><span class="lang">🇸🇮 Slovenian</span><span class="lang">🇷🇸 Serbian</span><span class="lang">🇧🇬 Bulgarian</span><span class="lang">🇺🇦 Ukrainian</span><span class="lang">🇷🇺 Russian</span><span class="lang">🇹🇷 Turkish</span><span class="lang">🇮🇱 Hebrew</span><span class="lang">🇸🇦 Arabic</span><span class="lang">🇨🇳 Chinese</span><span class="lang">🇯🇵 Japanese</span><span class="lang">🇰🇷 Korean</span><span class="lang">🇮🇳 Hindi</span><span class="lang">+ more on request</span>
+</div>
+<p class="kicker" style="margin-top:56px">Hear the difference</p>
+<h2 style="text-align:center;font-size:34px;margin:10px 0 30px">Real questions. Real answers.</h2>
+<div class="examples">
+<div class="ex"><p class="from">🇩🇪 German guest · 11:42 PM</p><p class="q">“Können wir um 1 Uhr nachts einchecken?”</p><p class="a"><b>StayLingo replied in German in 38 seconds</b> — after checking the calendar: yes, with door code and directions. You saw it in English: “Can we check in at 1 AM?” → answered yes.</p></div>
+<div class="ex"><p class="from">🇫🇷 French guest · 9:15 PM</p><p class="q">“Y a-t-il un parking près de l'appartement ?”</p><p class="a"><b>Answered in French</b> with the exact parking address and price from your house guide — not a generic guess.</p></div>
+<div class="ex"><p class="from">🇳🇱 Dutch guest · Sunday morning</p><p class="q">“Kunnen we zondag later uitchecken?”</p><p class="a"><b>Answered in Dutch</b> — and offered the €25 late checkout with a payment link. Sold before you'd finished your coffee.</p></div>
+</div></div></section>
+
+<section id="pricing"><div class="wrap">
+<p class="kicker">Pricing &amp; the founding offer</p>
+<h2 class="title">Costs less than one late-checkout fee.</h2>
+<p class="lede">Per listing, per month. No setup fee, no per-message charges, cancel any time. One €25 upsell covers a founding listing for almost three months.</p>
+<div class="grid g3">
+<div class="plan hot"><div class="badge">FOUNDING · 20 SPOTS</div>
+<p class="name">Founding Host</p><p class="price">€9</p><p class="per">per listing / month · locked for life</p>
+<ul><li><b>First week free</b> — no card needed</li><li>All Pro features included</li><li>Personal onboarding call</li><li>Your feedback shapes the product</li><li>€9 never rises. Ever.</li></ul>
+<a class="btn btn-amber" href="signup.html" style="width:100%">Claim founding price →</a></div>
+<div class="plan">
+<p class="name">Starter</p><p class="price">€14</p><p class="per">per listing / month</p>
+<ul><li>AI replies in <b>30+ languages</b>, 24/7</li><li>Calendar-checked answers</li><li>One translated inbox</li><li>Human safety net + WhatsApp alerts</li><li>Beds24 &amp; Smoobu</li></ul>
+<a class="btn btn-ghost" href="signup.html" style="width:100%">Start with Starter</a></div>
+<div class="plan">
+<p class="name">Pro</p><p class="price">€24</p><p class="per">per listing / month</p>
+<ul><li>Everything in Starter, plus:</li><li><b>Automatic upsells</b> with payment links</li><li>Extra-night offers</li><li>Priority support</li><li>Multi-property dashboard</li></ul>
+<a class="btn btn-ghost" href="signup.html" style="width:100%">Start with Pro</a></div>
+</div>
+<p class="lede" style="margin:26px auto 0">Managing 10+ listings? <a href="mailto:hello@staylingo.work.gd" style="color:var(--amber);font-weight:700">Talk to us</a> — agency pricing by conversation, not by formula.</p>
+</div></section>
+
+<section id="faq"><div class="wrap"><div class="faq">
+<p class="kicker">Questions</p>
+<h2 style="text-align:center;font-size:32px;margin:10px 0 26px">Before you ask</h2>
+<div class="q"><h3>What counts as one listing?</h3><p>One bookable property in your channel manager. An apartment is one listing; a villa is one listing. Simple.</p></div>
+<div class="q"><h3>Do I need Beds24 or Smoobu?</h3><p>Yes — StayLingo plugs into your channel manager, which is how it reads your calendar and reaches Airbnb and Booking.com messages. Beds24 first, Smoobu right behind it.</p></div>
+<div class="q"><h3>What does “locked for life” mean?</h3><p>Founding hosts pay €9 per listing for as long as they stay subscribed — even when public prices rise. It's our thank-you for trusting us early.</p></div>
+<div class="q"><h3>When do I pay?</h3><p>After your free week, only if you stay. No card is taken to start the free week.</p></div>
+<div class="q"><h3>Can I cancel?</h3><p>Any time, in two clicks. No lock-in, no exit call, no guilt trip.</p></div>
+</div></div></section>
 
 <section><div class="wrap"><div class="offer">
 <p class="kicker">Founding hosts — 20 spots</p>
-<h2>First month free. Then <span class="price-big">€9</span>/listing — locked for life.</h2>
+<h2>First week free. Then <span class="price-big">€9</span>/listing — locked for life.</h2>
 <p>Public price will be €14–€24 per listing. Founding hosts keep €9 forever, in exchange for honest feedback. When the 20 spots are gone, they're gone.</p>
-<div class="cta-row"><a class="btn btn-amber" href="pricing.html">See pricing</a><a class="btn btn-ghost" href="signup.html">Create your account</a></div>
+<div class="cta-row"><a class="btn btn-amber" href="signup.html">Get started →</a></div>
+<p class="cta-line">DM “STAY” on Instagram <a href="https://www.instagram.com/staylingo.ai">@staylingo.ai</a> · <a href="mailto:hello@staylingo.work.gd">hello@staylingo.work.gd</a></p>
 </div></div></section>
 
 <footer><div class="wrap"><div class="foot">
-<div><a class="logo" href="index.html"><span class="dot">💬</span>Stay<em>Lingo</em></a><p style="margin-top:10px;max-width:300px">AI guest messaging for European hosts. Replies in 30+ languages, 24/7.</p></div>
+<div><a class="logo" href="index.html"><span class="dot"><img src="/logo.png" alt="StayLingo" style="width:100%;height:100%;display:block;border-radius:11px"></span>Stay<em>Lingo</em></a><p style="margin-top:10px;max-width:300px">AI guest messaging for European hosts. Replies in 30+ languages, 24/7.</p></div>
 <div><strong style="color:#fff">Product</strong><br><a href="services.html">Services</a><br><a href="pricing.html">Pricing</a><br><a href="languages.html">Languages</a><br><a href="how-it-works.html">How it works</a></div>
 <div><strong style="color:#fff">Account</strong><br><a href="signup.html">Sign up</a><br><a href="login.html">Log in</a></div>
 <div><strong style="color:#fff">Contact</strong><br><a href="mailto:hello@staylingo.work.gd">hello@staylingo.work.gd</a><br><a href="https://www.instagram.com/staylingo.ai">Instagram: @staylingo.ai</a><br>DM “STAY” for a founding spot</div>
