@@ -118,6 +118,12 @@ footer{border-top:1px solid var(--line);padding:44px 0 34px;color:var(--muted);f
 .foot a:hover{color:#fff}
 .small{font-size:12.5px;color:#7286a0;margin-top:22px}
 @media(max-width:860px){.g3,.g2{grid-template-columns:1fr}.links{display:none}.hero{padding:56px 0 20px}.step{flex-direction:column}}
+
+.bill-toggle{display:flex;gap:6px;justify-content:center;margin:26px auto 30px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px;width:fit-content}
+.bill-toggle .bt{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:700;font-size:14.5px;padding:9px 20px;border-radius:999px;cursor:pointer}
+.bill-toggle .bt.on{background:linear-gradient(135deg,var(--amber),#ff8a3d);color:#1a1200}
+.bill-toggle .save{background:rgba(255,255,255,.16);border-radius:999px;padding:2px 8px;font-size:11.5px;margin-left:4px}
+.bill-toggle .bt.on .save{background:rgba(0,0,0,.18)}
 </style>
 </head>
 <body>
@@ -218,20 +224,22 @@ footer{border-top:1px solid var(--line);padding:44px 0 34px;color:var(--muted);f
 <p class="kicker">Pricing &amp; the founding offer</p>
 <h2 class="title">Costs less than one late-checkout fee.</h2>
 <p class="lede">Per listing, per month. No setup fee, no per-message charges, cancel any time. One €25 upsell covers a founding listing for almost three months.</p>
+<div class="bill-toggle" role="group" aria-label="Billing period"><button type="button" class="bt on" data-mode="m">Monthly</button><button type="button" class="bt" data-mode="a">Annual <span class="save">2 months free</span></button></div>
 <div class="grid g3">
 <div class="plan hot"><div class="badge">FOUNDING · 20 SPOTS</div>
-<p class="name">Founding Host</p><p class="price">€9</p><p class="per">per listing / month · founding rate fixed for life</p>
-<ul><li><b>First week free</b> — no card needed</li><li>All Pro features included</li><li>Personal onboarding call</li><li>Your feedback shapes the product</li><li>€9/month. Never rises. Ever.</li></ul>
+<p class="name">Founding Host</p><p class="price" data-m="€9" data-a="€90">€9</p><p class="per" data-m="per listing / month · founding rate fixed for life" data-a="per listing / year · founding rate fixed for life">per listing / month · founding rate fixed for life</p>
+<ul><li><b>First week free</b> — no card needed</li><li>All Pro features included</li><li>Personal onboarding call</li><li>Your feedback shapes the product</li><li data-m="€9/month. Never rises. Ever." data-a="€90/year. Never rises. Ever.">€9/month. Never rises. Ever.</li></ul>
 <a class="btn btn-amber" href="signup.html" style="width:100%">Claim founding price →</a></div>
 <div class="plan">
-<p class="name">Starter</p><p class="price">€14</p><p class="per">per listing / month</p>
+<p class="name">Starter</p><p class="price" data-m="€14" data-a="€140">€14</p><p class="per" data-m="per listing / month" data-a="per listing / year">per listing / month</p>
 <ul><li>AI replies in <b>30+ languages</b>, 24/7</li><li>Calendar-checked answers</li><li>One translated inbox</li><li>Human safety net + WhatsApp alerts</li><li>Beds24 &amp; Smoobu</li></ul>
 <a class="btn btn-ghost" href="signup.html" style="width:100%">Start with Starter</a></div>
 <div class="plan">
-<p class="name">Pro</p><p class="price">€24</p><p class="per">per listing / month</p>
+<p class="name">Pro</p><p class="price" data-m="€24" data-a="€240">€24</p><p class="per" data-m="per listing / month" data-a="per listing / year">per listing / month</p>
 <ul><li>Everything in Starter, plus:</li><li><b>Automatic upsells</b> with payment links</li><li>Extra-night offers</li><li>Priority support</li><li>Multi-property dashboard</li></ul>
 <a class="btn btn-ghost" href="signup.html" style="width:100%">Start with Pro</a></div>
 </div>
+<p class="bill-note lede" style="display:none;margin:18px auto 0;text-align:center">Annual billing: one payment a year — <b style="color:#fff">12 months for the price of 10</b> on every plan, founding rate included.</p>
 <p class="lede" style="margin:26px auto 0">Managing 10+ listings? <a href="mailto:hello@staylingo.work.gd" style="color:var(--amber);font-weight:700">Talk to us</a> — agency pricing by conversation, not by formula.</p>
 </div></section>
 
@@ -241,6 +249,7 @@ footer{border-top:1px solid var(--line);padding:44px 0 34px;color:var(--muted);f
 <div class="q"><h3>What counts as one listing?</h3><p>One bookable property in your channel manager. An apartment is one listing; a villa is one listing. Simple.</p></div>
 <div class="q"><h3>Do I need Beds24 or Smoobu?</h3><p>Yes — StayLingo plugs into your channel manager, which is how it reads your calendar and reaches Airbnb and Booking.com messages. Beds24 first, Smoobu right behind it.</p></div>
 <div class="q"><h3>What does “fixed for life” mean?</h3><p>Founding hosts pay €9 per listing per month, for as long as they stay subscribed — and the rate itself never goes up — even when public prices rise. It's our thank-you for trusting us early.</p></div>
+<div class="q"><h3>Can I pay annually?</h3><p>Yes — use the Annual switch above: every plan is 12 months for the price of 10 (Founding €90, Starter €140, Pro €240 per listing per year), billed once a year. The founding rate stays fixed on annual billing too.</p></div>
 <div class="q"><h3>When do I pay?</h3><p>After your free week, only if you stay. No card is taken to start the free week.</p></div>
 <div class="q"><h3>Can I cancel?</h3><p>Any time, in two clicks. No lock-in, no exit call, no guilt trip.</p></div>
 </div></div></section>
@@ -273,6 +282,19 @@ const chat=document.getElementById('chat');
 function play(){chat.innerHTML='';script.forEach((m,i)=>{setTimeout(()=>{const d=document.createElement('div');d.className='msg '+m[0];d.innerHTML=m[1];chat.appendChild(d);requestAnimationFrame(()=>d.classList.add('show'));},500+i*1500);});}
 document.getElementById('replay').addEventListener('click',play);
 const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){play();io.disconnect();}},{threshold:.3});io.observe(chat);
+</script>
+<script>
+document.querySelectorAll('.bill-toggle').forEach(function(tg){
+  tg.querySelectorAll('.bt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var annual = btn.getAttribute('data-mode')==='a';
+      tg.querySelectorAll('.bt').forEach(function(b){b.classList.toggle('on',b===btn);});
+      var sec = tg.closest('section') || document;
+      sec.querySelectorAll('[data-m]').forEach(function(el){ el.textContent = annual ? el.getAttribute('data-a') : el.getAttribute('data-m'); });
+      sec.querySelectorAll('.bill-note').forEach(function(n){ n.style.display = annual ? 'block' : 'none'; });
+    });
+  });
+});
 </script>
 </body>
 </html>
