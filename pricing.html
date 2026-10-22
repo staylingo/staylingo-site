@@ -116,3 +116,22 @@ document.querySelectorAll('.bill-toggle').forEach(function(tg){
 </script>
 </body>
 </html>
+
+<script>
+(function(){
+  var sec=document.querySelector('section'),wrap=sec.querySelector('.wrap');
+  var tg=document.createElement('div');
+  tg.className='bill-toggle';tg.setAttribute('role','group');tg.setAttribute('aria-label','Billing period');
+  tg.innerHTML='<button type="button" class="bt on" data-mode="m">Monthly</button><button type="button" class="bt" data-mode="a">Annual <span class="save">2 months free</span></button>';
+  wrap.insertBefore(tg,wrap.querySelector('.grid'));
+  tg.querySelectorAll('.bt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var annual=btn.getAttribute('data-mode')==='a';
+      tg.querySelectorAll('.bt').forEach(function(b){b.classList.toggle('on',b===btn);});
+      sec.querySelectorAll('[data-m]').forEach(function(el){el.textContent=annual?el.getAttribute('data-a'):el.getAttribute('data-m');});
+      sec.querySelectorAll('.bill-note').forEach(function(n){n.style.display=annual?'block':'none';});
+    });
+  });
+})();
+</script>
+</script>
